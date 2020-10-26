@@ -1,0 +1,59 @@
+// 站点主色
+// tips: 要达到整站主题修改效果, 请确保[$--color-primary]站点主色与[/src/element-ui-theme/index.js]文件中[import './element-[#17B3A3]/index.css']当前主题色一致
+
+
+// Navbar 导航栏
+  // default
+  $navbar--background-color-default: rgba(59, 89, 152, 1);
+  $navbar--text-color-default: #fff;
+  $navbar--hover-background-color-default: mix(#000, $navbar--background-color-default, 15%);
+  $navbar--hover-text-color-default: $navbar--text-color-default;
+  // inverse
+  $navbar--background-color-inverse: #3E8EF7;
+  $navbar--text-color-inverse: #fff;
+  $navbar--hover-background-color-inverse: mix(#000, $navbar--background-color-inverse, 15%);
+  $navbar--hover-text-color-inverse: $navbar--text-color-inverse;
+  // dark
+  $navbar--background-color-dark: #263238;
+  $navbar--text-color-dark: #fff;
+  $navbar--hover-background-color-dark: mix(#000, $navbar--background-color-dark, 15%);
+  $navbar--hover-text-color-dark: $navbar--text-color-dark;
+  // vitality
+  $navbar--background-color-vitality: #3caf7b;
+  $navbar--text-color-vitality: #fff;
+  $navbar--hover-background-color-vitality: mix(#000, $navbar--background-color-vitality, 15%);
+  $navbar--hover-text-color-vitality: $navbar--text-color-vitality;
+  // mysterious
+  $navbar--background-color-mysterious: #2f2a6b;
+  $navbar--text-color-mysterious: #fff;
+  $navbar--hover-background-color-mysterious: mix(#000, $navbar--background-color-mysterious, 15%);
+  $navbar--hover-text-color-mysterious: $navbar--text-color-mysterious;
+  
+
+// Sidebar 侧边栏
+  // 默认 
+  $sidebar--background-color-default: #fff;
+  
+  // 黑色
+  $sidebar--text-color-dark: #bfcbd9;
+  $sidebar--active-text-color-dark: #409EFF !important;
+  $sidebar--hover-text-color-dark: #fff;
+  $sidebar--background-color-dark:#304156;
+  $sidebar--sub-background-color-dark:#1f2d3d;
+  $sidebar--hover-background-color-dark:#263445;
+  $sidebar--hover-sub-background-color-dark:#001528;
+
+  // 高亮
+  $sidebar--text-color-light: #263445;
+  $sidebar--active-text-color-light: #fff !important;
+  $sidebar--hover-text-color-light: #fff !important;
+  $sidebar--background-color-light:#f0f2f5;
+  $sidebar--sub-background-color-light:#fff;
+  $sidebar--hover-background-color-light:#263445 !important;
+  $sidebar--hover-sub-background-color-light:#001528 !important;
+// Content 内容区域的背景
+  $content--background-color: #fff;
+
+
+
+

@@ -1,0 +1,689 @@
+// 站点主色
+// tips: 要达到整站主题修改效果, 请确保[$--color-primary]站点主色与[/src/element-ui-theme/index.js]文件中[import './element-[#17B3A3]/index.css']当前主题色一致
+
+
+// Navbar 导航栏
+  // default
+  $navbar--background-color-default: rgba(59, 89, 152, 1);
+  $navbar--text-color-default: #fff;
+  $navbar--hover-background-color-default: mix(#000, $navbar--background-color-default, 15%);
+  $navbar--hover-text-color-default: $navbar--text-color-default;
+  // inverse
+  $navbar--background-color-inverse: #3E8EF7;
+  $navbar--text-color-inverse: #fff;
+  $navbar--hover-background-color-inverse: mix(#000, $navbar--background-color-inverse, 15%);
+  $navbar--hover-text-color-inverse: $navbar--text-color-inverse;
+  // dark
+  $navbar--background-color-dark: #263238;
+  $navbar--text-color-dark: #fff;
+  $navbar--hover-background-color-dark: mix(#000, $navbar--background-color-dark, 15%);
+  $navbar--hover-text-color-dark: $navbar--text-color-dark;
+  // vitality
+  $navbar--background-color-vitality: #3caf7b;
+  $navbar--text-color-vitality: #fff;
+  $navbar--hover-background-color-vitality: mix(#000, $navbar--background-color-vitality, 15%);
+  $navbar--hover-text-color-vitality: $navbar--text-color-vitality;
+  // mysterious
+  $navbar--background-color-mysterious: #2f2a6b;
+  $navbar--text-color-mysterious: #fff;
+  $navbar--hover-background-color-mysterious: mix(#000, $navbar--background-color-mysterious, 15%);
+  $navbar--hover-text-color-mysterious: $navbar--text-color-mysterious;
+  
+
+// Sidebar 侧边栏
+  // 默认 
+  $sidebar--background-color-default: #fff;
+  
+  // 黑色
+  $sidebar--text-color-dark: #bfcbd9;
+  $sidebar--active-text-color-dark: #409EFF !important;
+  $sidebar--hover-text-color-dark: #fff;
+  $sidebar--background-color-dark:#304156;
+  $sidebar--sub-background-color-dark:#1f2d3d;
+  $sidebar--hover-background-color-dark:#263445;
+  $sidebar--hover-sub-background-color-dark:#001528;
+
+  // 高亮
+  $sidebar--text-color-light: #263445;
+  $sidebar--active-text-color-light: #fff !important;
+  $sidebar--hover-text-color-light: #fff !important;
+  $sidebar--background-color-light:#f0f2f5;
+  $sidebar--sub-background-color-light:#fff;
+  $sidebar--hover-background-color-light:#263445 !important;
+  $sidebar--hover-sub-background-color-light:#001528 !important;
+// Content 内容区域的背景
+  $content--background-color: #fff;
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  padding:0;margin:0;
+}
+ul,li,ol{
+  list-style-type: none;
+}
+body {
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.15;
+  color: #303133;
+  background-color: #fff;
+}
+a {
+  color: mix(#fff, #000, 20%);
+  text-decoration: none;
+  &:focus,
+  &:hover {
+    color: #fff;
+    text-decoration: underline;
+  }
+}
+img {
+  vertical-align: middle;
+}
+
+
+/* Utils
+------------------------------ */
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  display: table;
+}
+.clearfix:after {
+  clear: both;
+}
+
+
+/* Animation
+------------------------------ */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
+
+/* Reset element-ui
+------------------------------ */
+.site-wrapper {
+  .el-pagination {
+    margin-top: 15px;
+    text-align: right;
+  }
+}
+
+
+/* Layout
+------------------------------ */
+.site-wrapper {
+  position: relative;
+  min-width: 1180px;
+}
+
+
+/* Sidebar fold
+------------------------------ */
+.site-sidebar--fold {
+  // .site-navbar__header,
+  // .site-navbar__brand,
+  .site-sidebar,
+  .site-sidebar__inner,
+  .el-menu.site-sidebar__menu {
+    width: 64px;
+  }
+  .site-content__wrapper {
+    margin-left: 64px;
+  }
+  .site-navbar__brand {
+    &-lg {
+      display: none;
+    }
+    &-mini {
+      display: inline-block;
+    }
+  }
+  .site-sidebar,
+  .site-sidebar__inner {
+    overflow: initial;
+  }
+  .site-sidebar__menu-icon {
+    margin-right: 0;
+    font-size: 20px;
+  }
+  .site-content--tabs > .el-tabs > .el-tabs__header {
+    left: 64px;
+  }
+}
+.site-navbar__brand{
+  background:  url("../img/logo_left6.png") center center  no-repeat;
+  background-size:80% 80%;
+}
+
+
+// animation
+.site-navbar__header,
+.site-navbar__brand,
+.site-navbar__body,
+.site-sidebar,
+.site-sidebar__inner,
+.site-sidebar__menu.el-menu,
+.site-sidebar__menu-icon,
+.site-content__wrapper,
+.site-content--tabs > .el-tabs .el-tabs__header {
+  transition: inline-block .3s, left .3s, width .3s, margin-left .3s, font-size .3s;
+}
+
+
+/* Navbar
+------------------------------ */
+.site-navbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1030;
+  height: 50px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .08);
+
+  &--default {
+    .site-navbar__body, .site-navbar__header{
+      background-color:$navbar--background-color-default;
+    }
+    .el-menu {
+      > .el-menu-item,
+      > .el-submenu .el-submenu__title {
+        color: $navbar--text-color-default;
+        &:focus,
+        &:hover {
+          color: $navbar--hover-text-color-default;
+          background-color: $navbar--hover-background-color-default;
+        }
+      }
+      // > .el-menu-item.is-active,
+      // > .el-submenu.is-active .el-submenu__title {
+      //   border-bottom-color: mix(#fff, $navbar--background-color-default, 85%);
+      // }
+      .el-menu-item i,
+      .el-submenu__title i,
+      .el-dropdown {
+        color: $navbar--text-color-default;
+      }
+    }
+    // .el-menu--popup-bottom-start {
+    //   background-color: $navbar--background-color-default;
+    // }
+  }
+  &--inverse {
+    .site-navbar__body, .site-navbar__header{
+      background-color:$navbar--background-color-inverse;
+    }
+    .el-menu {
+      > .el-menu-item,
+      > .el-submenu .el-submenu__title {
+        color: $navbar--text-color-inverse;
+        &:focus,
+        &:hover {
+          color: $navbar--hover-text-color-inverse;
+          background-color: $navbar--hover-background-color-inverse;
+        }
+      }
+      .el-menu-item i,
+      .el-submenu__title i,
+      .el-dropdown {
+        color: $navbar--text-color-inverse;
+      }
+    }
+  }
+  &--dark {
+    .site-navbar__body, .site-navbar__header{
+      background-color:$navbar--background-color-dark;
+    }
+    .el-menu {
+      > .el-menu-item,
+      > .el-submenu .el-submenu__title {
+        color: $navbar--text-color-dark;
+        &:focus,
+        &:hover {
+          color: $navbar--hover-text-color-dark;
+          background-color: $navbar--hover-background-color-dark;
+        }
+      }
+      .el-menu-item i,
+      .el-submenu__title i,
+      .el-dropdown {
+        color: $navbar--text-color-dark;
+      }
+    }
+  }
+  &--vitality {
+    .site-navbar__body, .site-navbar__header{
+      background-color:$navbar--background-color-vitality;
+    }
+    .el-menu {
+      > .el-menu-item,
+      > .el-submenu .el-submenu__title {
+        color: $navbar--text-color-vitality;
+        &:focus,
+        &:hover {
+          color: $navbar--hover-text-color-vitality;
+          background-color: $navbar--hover-background-color-vitality;
+        }
+      }
+      .el-menu-item i,
+      .el-submenu__title i,
+      .el-dropdown {
+        color: $navbar--text-color-vitality;
+      }
+    }
+  }
+  &--mysterious {
+    .site-navbar__body, .site-navbar__header{
+      background-color:$navbar--background-color-mysterious;
+    }
+    .el-menu {
+      > .el-menu-item,
+      > .el-submenu .el-submenu__title {
+        color: $navbar--text-color-mysterious;
+        &:focus,
+        &:hover {
+          color: $navbar--hover-text-color-mysterious;
+          background-color: $navbar--hover-background-color-mysterious;
+        }
+      }
+      .el-menu-item i,
+      .el-submenu__title i,
+      .el-dropdown {
+        color: $navbar--text-color-mysterious;
+      }
+    }
+  }
+  
+  &__header {
+    position: relative;
+    float: left;
+    width: 230px;
+    height: 50px;
+    overflow: hidden;
+  }
+  &__brand {
+    display: table-cell;
+    vertical-align: middle;
+    width: 230px;
+    height: 50px;
+    margin: 0;
+    line-height: 50px;
+    font-size: 20px;
+    text-align: center;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: #fff;
+    
+    &-lg,
+    &-mini {
+      margin: 0 5px;
+      color: #fff;
+      &:focus,
+      &:hover {
+        color: #fff;
+        text-decoration: none;
+      }
+    }
+    &-mini {
+      display: none;
+    }
+  }
+  &__switch {
+    font-size: 18px;
+    border-bottom: none !important;
+  }
+  &__avatar {
+    border-bottom: none !important;
+    * {
+      vertical-align: inherit;
+    }
+    .el-dropdown-link {
+      > img {
+        width: 36px;
+        height: auto;
+        margin-right: 5px;
+        border-radius: 100%;
+        vertical-align: middle;
+      }
+    }
+  }
+  &__body {
+    position: relative;
+    margin-left: 230px;
+    padding-right: 15px;
+    background-color: #fff;
+  }
+  &__menu {
+    float: left;
+    background-color: transparent;
+    border-bottom: 0;
+
+    &--right {
+      float: right;
+    }
+    a:focus,
+    a:hover {
+      text-decoration: none;
+    }
+    .el-menu-item,
+    .el-submenu .el-submenu__title {
+      height: 50px;
+      line-height: 50px;
+    }
+    .el-submenu > .el-menu {
+      top: 55px;
+    }
+    .el-badge {
+      display: inline;
+      z-index: 2;
+      &__content {
+        line-height: 16px;
+      }
+    }
+  }
+}
+
+
+
+
+/* Sidebar
+------------------------------ */
+// 默认颜色
+.site-sidebar--default,.site-sidebar--default .site-sidebar__menu.el-menu .el-submenu{
+  background:$sidebar--background-color-default;
+}
+
+.site-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1020;
+  width: 230px;
+  height: 100%;
+  overflow: hidden;
+  padding-top:50px;
+  &--dark,
+  &--dark-popper {
+    background-color: $sidebar--background-color-dark;
+    .site-sidebar__menu.el-menu,
+    > .el-menu--popup {
+      background-color: $sidebar--background-color-dark;
+      .el-menu-item{
+        background:$sidebar--background-color-dark;
+        color:$sidebar--text-color-dark;
+      }
+      .el-submenu{
+        .el-submenu__title {
+          background:$sidebar--background-color-dark;;
+          color: $sidebar--text-color-dark;
+          &:hover {
+            color: $sidebar--hover-text-color-dark;
+            background-color: $sidebar--hover-background-color-dark;
+            i{
+              color: $sidebar--hover-text-color-dark; 
+            }
+          }
+          // 侧边导航自定义图标颜色
+          i{
+            color: $sidebar--text-color-dark;
+          }
+        }
+        .el-menu.el-menu--inline .el-menu-item,
+        .el-menu.el-menu--inline .el-submenu .el-submenu__title{
+          background:$sidebar--sub-background-color-dark;
+          &:hover {
+            color: $sidebar--hover-text-color-dark; 
+            background-color: $sidebar--hover-sub-background-color-dark;
+          }
+        }
+      }
+      .el-menu,
+      .el-submenu.is-opened {
+        background-color: $sidebar--background-color-dark;
+      }
+      .el-menu-item.is-active,
+      .el-submenu.is-active>.el-submenu__title i,
+      .el-submenu.is-active>.el-submenu__title {
+        color: $sidebar--active-text-color-dark;
+      }
+    }
+  }
+  &--light,
+  &--light-popper {
+    background-color: $sidebar--background-color-light;
+    .site-sidebar__menu.el-menu,
+    > .el-menu--popup {
+      background-color: $sidebar--background-color-light;
+      .el-menu-item{
+        background:$sidebar--background-color-light;
+        color:$sidebar--text-color-light;
+      }
+      .el-submenu{
+        .el-submenu__title {
+          background:$sidebar--background-color-light;;
+          color: $sidebar--text-color-light;
+          &:hover {
+            color: $sidebar--hover-text-color-light;
+            background-color: $sidebar--hover-background-color-light;
+            i{
+              color: $sidebar--hover-text-color-light; 
+            }
+          }
+          // 侧边导航自定义图标颜色
+          i{
+            color: $sidebar--text-color-light;
+          }
+        }
+        .el-menu.el-menu--inline .el-menu-item,
+        .el-menu.el-menu--inline .el-submenu .el-submenu__title{
+          background:$sidebar--sub-background-color-light;
+          &:hover {
+            color: $sidebar--hover-text-color-light; 
+            background-color: $sidebar--hover-sub-background-color-light;
+          }
+        }
+        .el-menu.el-menu--inline .el-submenu.is-active .el-submenu__title{
+          color:#000;
+          font-weight:bold;
+        }
+        .el-menu.el-menu--inline .el-menu-item.is-active{
+          color: $sidebar--hover-text-color-light; 
+          background-color: $sidebar--hover-sub-background-color-light;
+        }
+      }
+      .el-menu,
+      .el-submenu.is-opened {
+        background-color: $sidebar--background-color-light;
+      }
+      .el-menu-item.is-active{
+        color: $sidebar--active-text-color-light;
+      }
+    }
+    .el-submenu.is-active>.el-submenu__title{
+      color:#000;
+      font-weight:bold;
+    }
+  }
+  
+
+  &__inner {
+    position: relative;
+    z-index: 1;
+    width: 250px;
+    height: 100%;
+    padding-bottom: 15px;
+    overflow-y: scroll;
+  }
+  &__menu.el-menu {
+    width: 230px;
+    border-right: 0;
+    height: 100%;
+  }
+  &__menu-icon {
+    width: 24px;
+    margin-right: 5px;
+    text-align: center;
+    font-size: 16px;
+    color: inherit !important;
+  }
+}
+
+
+/* Content
+------------------------------ */
+.site-content {
+  position: relative;
+  padding: 15px;
+
+  &__wrapper {
+    position: relative;
+    padding-top: 50px;
+    margin-left: 230px;
+    min-height: 100%;
+    background: $content--background-color;
+  }
+  &--tabs {
+    padding: 55px 0 0;
+  }
+  > .el-tabs {
+    > .el-tabs__header {
+      position: fixed;
+      top: 50px;
+      left: 230px;
+      right: 0;
+      z-index: 930;
+      padding: 0 55px 0 15px;
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .12), 0 0 6px 0 rgba(0, 0, 0, .04);
+      background-color: #fff;
+      > .el-tabs__nav-wrap {
+        margin-bottom: 0;
+        &:after {
+          display: none;
+        }
+      }
+    }
+    > .el-tabs__content {
+      // padding: 0 15px 15px;
+      > .site-tabs__tools {
+        position: fixed;
+        top: 50px;
+        right: 0;
+        z-index: 931;
+        height: 40px;
+        padding: 0 12px;
+        font-size: 16px;
+        line-height: 40px;
+        background-color: $content--background-color;
+        cursor: pointer;
+        .el-icon--right {
+          margin-left: 0;
+        }
+      }
+    }
+  }
+}
+.is-align-middle{
+  overflow: hidden;
+}
+// 全局修改input框的下边距
+.el-form-item--mini.el-form-item, .el-form-item--small.el-form-item{
+  margin-bottom:13px;
+}
+// 全局修改button的左右填充
+.el-button--mini, .el-button--mini.is-round{
+  padding:7px 10px;
+}
+// 去除所有内容区域main的上填充来使header的按钮靠的更近
+.el-container .el-main{
+  padding-top:0;
+}
+// 解决表格出现滚动条表头不对齐的问题
+.el-table th.gutter,
+.el-table colgroup.gutter{
+  display: table-cell !important;
+  width: 17px !important;
+}
+// 让弹窗居中并且不出现滚动条
+.el-dialog{
+  display: flex;
+  flex-direction: column;
+  margin:0 !important;
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  /*height:600px;*/
+  max-height:calc(100% - 30px);
+  max-width:calc(100% - 30px);
+}
+.el-dialog .el-dialog__body{
+  flex:1;
+  overflow: auto;
+}
+// 强制不换行并出现省略号
+.el-table .cell{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+// 给hidden变为visible来保证表头高度统一 
+//.el-table .cell, .el-table th div{
+ // overflow:visible;
+//}
+
+// .el-table th div {
+//   line-height:30px;
+// }
+// 底部翻页按钮上边距清0
+.el-footer .el-pagination{
+  margin-top:0;
+}
+// 主题部分通用样式
+.currency-style-box{
+  .el-container{
+    .el-header,.el-footer{
+      height:auto !important;
+      .el-row{
+        display:flex;
+        .el-col{
+          width:100%;
+        }
+        .el-col:last-child{
+          width:165px;
+          text-align:right;
+        }
+      }
+      .el-row:last-child{
+        padding-top:5px;
+        padding-bottom:5px;
+        .el-col:last-child{
+            width:180px;
+        }
+      }
+    }
+    .el-footer{
+      .el-row{
+        justify-content: flex-end;
+      }
+    }
+  }
+}
+// table thead.is-group tr th{
+//   background:rgba(0,0,0,0);
+// }
+// table{
+//   background: url('../img/bg2.7.1.jpg') no-repeat;
+// }
+// table tbody tr.el-table__row,table tbody tr.el-table__row td{
+//   background-color:rgba(0,0,0,0) !important;
+// } 

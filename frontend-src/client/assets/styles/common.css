@@ -1,0 +1,54 @@
+/*列表头样式*/
+.el-table th, .el-table tr.header-row{
+  background-color: #f5f7fa;
+  font-size:1.1em;
+}
+.el-table__expanded-cell .el-table th{
+  background: #ECFDFE;
+}
+/*展开行样式*/
+.el-table__expanded-cell[class*=cell] {
+  padding: 0px 50px;
+}
+/*侧边栏滚动条*/
+.site-sidebar__inner{
+  width:230px;
+  overflow-y: auto;
+  height: 100%;
+}
+/*自定义element icon*/
+@font-face {
+  font-family: 'iconfont';  /* project id 792365 */
+  src: url('//at.alicdn.com/t/font_792365_a6u46z24ywi.eot');
+  src: url('//at.alicdn.com/t/font_792365_a6u46z24ywi.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_792365_a6u46z24ywi.woff') format('woff'),
+  url('//at.alicdn.com/t/font_792365_a6u46z24ywi.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_792365_a6u46z24ywi.svg#iconfont') format('svg');
+}
+[class^="el-icon-third"], [class*=" el-icon-third"] {
+  font-family: "iconfont" !important;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.el-icon-third-scan:before {
+  content: "\e66e";
+}
+.el-icon-third-example:before {
+  content: "\e607";
+}
+.el-icon-third-basic:before {
+  content: "\e644";
+}
+.el-icon-third-material:before {
+  content: "\e647";
+}
+.el-icon-third-stock:before {
+  content: "\e620";
+}
+/* 背景图片 */
+body{
+  background:url(../../assets/images/login/background-industrial.jpg) no-repeat;
+  background-size: 100%;
+  background-position-y: 20%;
+}

@@ -1,0 +1,25 @@
+
+.alertTips-alert-box{
+	border: #DDDDDD 1px solid;
+	width: 350px;
+	height: 400px;
+	background: #fff;
+	border-radius: 6px;
+	position: absolute;
+	left: 50%;
+	margin-left: 180px;
+	top: 50%;
+	margin-top: 110px;
+	z-index: 100000;
+	overflow-y: scroll;
+	overflow-x: hidden
+}
+.alertTips-top-box{
+	height: 24px;
+	line-height: 25px;
+	 border-bottom: 1px solid #ddd; 
+	padding: 0 20px;
+	color: #666;
+	font-family: "微软雅黑";
+}
+

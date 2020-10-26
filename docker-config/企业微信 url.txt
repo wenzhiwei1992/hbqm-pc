@@ -1,0 +1,6 @@
+http://chiyun.valuprosys.com:8082/cym?corpId=ww93eea799038028dd&secret=LoOt579lj6iQr3853l1KAwx1Th6Zy_VUOv5PkUyrD_Y&tenantId=pcmaster_org&redirectUrl=http://chiyun.valuprosys.com:8082/cym
+
+
+# 使用方式
+1. 配置在企业微信后台,微工作台的 url
+2. 在系统的 微信<->本地用户映射 菜单中配置好本地用户名对应的企业微信用户名,该微信用户就可以单点登录
