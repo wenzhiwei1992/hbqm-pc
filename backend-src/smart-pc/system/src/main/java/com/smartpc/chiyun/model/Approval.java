@@ -1,6 +1,5 @@
-package com.smartpc.chiyun.model.user;
+package com.smartpc.chiyun.model;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.smartpc.chiyun.model.CommonProperties;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,15 +8,15 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import java.math.BigDecimal;
-import java.util.List;
 
 @Entity
 @Getter
 @Setter
-@Table(name = "pc_org_apply_history")
-public class OrgApply extends CommonProperties {
+@Table(name = "pc_approval")
+public class Approval extends CommonProperties {
 
+    @Column(name = "approval_level")
+    private String approvalLevel;
 
     @Column(name = "approval_status")
     private String approvalStatus;
@@ -30,10 +29,22 @@ public class OrgApply extends CommonProperties {
     @Column(name = "city_id")
     private Long cityId;
 
-    @Column(name = "approvaler_id")
-    private String approvalerId;
+    @Column(name = "association_id")
+    private Long associationId;
+
+    @Column(name = "code_type")
+    private String codeType;
 
     @Column(name = "reason")
     private String reason;
+
+    @Column(name = "approvaler_id")
+    private Long approvalerId;
+
+    @Transient
+    private String nowCodeName;
+    @Column(name = "approval_dept_id")
+    private Long approvalDeptId;
+
 
 }

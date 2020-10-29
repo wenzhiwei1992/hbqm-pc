@@ -55,14 +55,14 @@
         <el-input-number  v-model="editForm.lineNum"></el-input-number>
       </el-form-item>
 
-      <el-form-item label="设计生产能力（万m/万吨）" prop="designProductivity">
+      <el-form-item label="设计生产能力(万m/万吨)" prop="designProductivity">
         <el-input v-model="editForm.designProductivity"   @keyup.native="parseValue1()"  placeholder="请输入内容"></el-input>
       </el-form-item>
 
 
       <el-form-item
               prop="realProductivity"
-              label="实际生产能力（万m/万吨）"
+              label="实际生产能力(万m/万吨)"
               width="120">
          <el-input  v-model="editForm.realProductivity"   @keyup.native="parseValue()" placeholder="请输入内容" ></el-input>
       </el-form-item>
@@ -174,8 +174,7 @@ export default {
       },
       changeProvince(){
           let id = this.editForm.provinceId;
-          console.log(id)
-          this.editForm.cityId = ''
+          this.$set(this.editForm,'cityId','')
           this.arrCitys = []
           let query = {
               id:id,

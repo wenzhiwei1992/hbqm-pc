@@ -82,6 +82,14 @@ public class LoginService {
             List<Org> orgs = orgDao.findOrgsByProvinceIdOrCityId(user.getDeptId());
             List<Long> orgsIds = orgs.stream().map(Org::getId).collect(Collectors.toList());
             user.setOrgIdsData(orgsIds);
+
+            //区分管理员是省级还是市级
+            Department department = departmentDao.findDepartmentById(user.getDeptId());
+            if(department.getCodeLevel()==0){
+                user.setAreaLevel(1);
+            }else{
+                user.setAreaLevel(2);
+            }
         }else{//普通用户
             user.setOrgIdsData(Arrays.asList(user.getOrgId()));
         }

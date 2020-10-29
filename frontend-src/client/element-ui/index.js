@@ -76,7 +76,9 @@ import {
     MessageBox,
     Message,
     Notification,
-    Image
+    Image,
+    Timeline,
+    TimelineItem
 } from 'element-ui'
 
 Vue.use(Pagination)
@@ -143,6 +145,8 @@ Vue.use(Aside)
 Vue.use(Main)
 Vue.use(Footer)
 Vue.use(Image)
+Vue.use(Timeline)
+Vue.use(TimelineItem)
 
 Vue.use(Loading.directive)
 

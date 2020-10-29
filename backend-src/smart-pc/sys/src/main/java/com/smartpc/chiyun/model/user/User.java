@@ -175,4 +175,6 @@ public class User extends CommonProperties implements UserDetails {
     private String confirmPassword;
     @Transient
     private String orgName;
+    @Transient
+    private Integer areaLevel;
 }

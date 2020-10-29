@@ -9,7 +9,7 @@ import menuTabService from '@/service/menuTabService'
 import { filterAsyncRouter } from '@/store/modules/permission.js'
 import storage from 'good-storage'
 
-const whiteList = ['/login','/menu','/product','/chartDemo','/mapIndex'] //免登录白名单
+const whiteList = ['/login','/menu','/product','/chartDemo','/mapIndex','/register'] //免登录白名单
 let _currentSystem
 // 解决两次跳转同一路由报错的问题
 const VueRouterPush = Router.prototype.push

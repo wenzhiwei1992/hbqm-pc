@@ -122,47 +122,28 @@
         >
           <el-table-column type="expand">
             <template slot-scope="props">
-              <el-table
-                :data="props.row.users"
-                size="mini"
-              >
+              <el-form label-position="left" inline class="demo-table-expand">
+                <el-form-item label="基地名称"><span>{{ props.row.orgName }}</span></el-form-item>
+                <el-form-item label="基地地址"><span>{{ props.row.address }}</span></el-form-item>
+                <el-form-item label="申请人"><span>{{ props.row.proposer }}</span></el-form-item>
+                <el-form-item label="申请人手机号"><span>{{ props.row.proposerPhone }}</span></el-form-item>
+                <el-form-item label="经纬度"><span>{{ props.row.longitude }}</span></el-form-item>
+                <el-form-item label="省"><span>{{ props.row.provinceName }}</span></el-form-item>
+                <el-form-item label="市"><span>{{ props.row.cityName }}</span></el-form-item>
+                <el-form-item label="生产类型"><span>{{ props.row.productionType }}</span></el-form-item>
+                <el-form-item label="生产线/条"><span>{{ props.row.lineNum }}</span></el-form-item>
+                <el-form-item label="设计生产能力(万m/万吨)"><span>{{ props.row.designProductivity }}</span></el-form-item>
+                <el-form-item label="实际生产能力(万m/万吨)"><span>{{ props.row.realProductivity }}</span></el-form-item>
+                <el-form-item label="状态"><span>{{ props.row.state }}</span></el-form-item>
+                <el-form-item label="组织描述"><span>{{ props.row.orgDesc }}</span></el-form-item>
+                <el-form-item label="审批状态"><span>{{ props.row.approvalStatus }}</span></el-form-item>
 
-                <el-table-column
-                  prop="username"
-                  label="用户名"
-                  align="center"
-                  width="100"
-                ></el-table-column>
-
-                <el-table-column
-                  prop="realName"
-                  label="姓名"
-                  align="center"
-                  width="100"
-                >
-                </el-table-column>
-
-              </el-table>
+              </el-form>
             </template>
           </el-table-column>
-          <el-table-column
-            prop="users.length"
-            label="用户数量"
-            align="center"
-            width="100"
-          >
-          </el-table-column>
 
-          <el-table-column
-                  prop="orgName"
-                  align="center"
-                  label="基地名称"
-          >
-            <template slot-scope="scope">
-              <a href="javascript:void(0);" style="color: #409EFF;" @click.stop="editClicks(scope.row)">
-                {{scope.row.orgName}}
-              </a>
-            </template>
+          <el-table-column prop="orgName"align="center" label="基地名称">
+
           </el-table-column>
 
 
@@ -223,14 +204,14 @@
 
           <el-table-column
                   prop="designProductivity"
-                  label="设计生产能力（万m/万吨）"
+                  label="设计生产能力(万m/万吨)"
                   align="center"
                   width="210"
           >
           </el-table-column>
           <el-table-column
                   prop="realProductivity"
-                  label="实际生产能力（万m/万吨）"
+                  label="实际生产能力(万m/万吨)"
                   align="center"
                   width="210"
           >
@@ -254,13 +235,12 @@
           >
           </el-table-column>
 
-
-          <el-table-column
-                  fixed="right"
-                  prop="approvalStatus"
-                  label="审批状态"
-                  width="110"
-          >
+          <el-table-column prop="approvalStatus" align="center" label="审批状态">
+            <template slot-scope="scope">
+              <a href="javascript:void(0);" style="color: #409EFF;" @click.stop="findApprovals(scope.row)">
+                {{scope.row.approvalStatus}}
+              </a>
+            </template>
           </el-table-column>
 
           <el-table-column
@@ -321,59 +301,49 @@
 
 
     <el-dialog
-            title="基地详情"
+            title="审批详情"
             :visible.sync="editFormVisible1"
             width="80%"
             top="6vh"
     >
 
-      <el-form
-              inline="inline"
-              :model="editForm"
-              v-if="editForm"
-              ref="editForm"
-              label-width="80px"
-      >
-
-        <span> 基地名称:{{editForm.orgName}}</span>
-
-        <span> 基地地址:{{editForm.address}}</span>
-
-        <span> 基地经纬度:{{editForm.longitude}}</span>
-
-        <span> 申请人:{{editForm.proposer}}</span>
-
-        <span> 申请人手机号:{{editForm.proposerPhone}}</span>
-        <el-form-item label="申请人" prop="proposer">
-          <el-input disabled v-model="editForm.proposer"></el-input>
-        </el-form-item>
-        <el-form-item label="申请人手机号" prop="proposerPhone">
-          <el-input disabled v-model="editForm.proposerPhone"></el-input>
-        </el-form-item>
-
-        <span> 省:{{editForm.provinceName}}</span>
-
-        <span> 市:{{editForm.cityName}}</span>
-        <span> 生产类型:{{editForm.productionType}}</span>
-        <span> 生产线/条:{{editForm.lineNum}}</span>
-        <span> 设计生产能力（万m/万吨）:{{editForm.designProductivity}}</span>
-        <span> 实际生产能力（万m/万吨）:{{editForm.realProductivity}}</span>
-
-        <span> 状态:{{editForm.state}}</span>
-
-        <span> 情况说明:{{editForm.orgDesc}}</span>
-
-
-      </el-form>
+      <div class="gjnav">
+        <div class="headnav">{{orgName}}</div>
+        <div class="bodynav share-box">
+          <el-timeline >
+            <el-timeline-item v-for="(item, index) in approvalList" :key="index" :timestamp="item.dateCreated" placement="top">
+              <el-card>
+                <h4>审批时间:{{item.dateCreated}}</h4>
+                <h4>审批层级:{{item.approvalLevel}}</h4>
+                <h4>审批部门:{{item.deptName}}</h4>
+                <h4>审批结果:{{item.approvalStatus}}</h4>
+                <p> 审批意见:{{item.reason}}</p>
+                <h4>审批人:{{item.approvalerName}}</h4>
+              </el-card>
+            </el-timeline-item>
+          </el-timeline>
+        </div>
+      </div>
 
     </el-dialog>
 
 
+    <!--送检-->
+    <el-dialog
+            :visible.sync="checkEditFormVisible"
+            width="30%"
+    >
+      <checkout-status
+              :edit-form="editForm"
+              @checkout-status-finish="checkoutStatusFinish"
+              @checkout-status-cancel="checkoutStatusCancel"
+      ></checkout-status>
+    </el-dialog>
   </div>
 
 </template>
 <script>
-
+    import approvalModel from "../../../../model/system/approval";
     import codeExplainContent from '../../../../model/basicdata/codeExlpainContent'
     import deptModel from '../../../../model/basicdata/dept'
 import menuTabService from '../../../../service/menuTabService'
@@ -384,10 +354,12 @@ import moment from 'moment'
 import UserChoose from './UserChoose.vue'
 import deptTreeManage from './DeptTreeManage.vue'
 import { Notification } from 'element-ui'
+    import CheckoutStatus from '../../project/ApprovalStatus.vue';
 export default {
   components: {
     'model-edit': OrgEdit,
     'user-choose': UserChoose,
+      'checkout-status': CheckoutStatus
   },
   data() {
     return {
@@ -414,9 +386,12 @@ export default {
         arrProductions: [],
         arrStates: [],
         arrApprovalStates:[],
+        approvalList:[],
+        orgName:"",
       mode: '',
       editFormVisible: false,
         editFormVisible1:false,
+        checkEditFormVisible: false,
       editForm: null,
       userChooseVisible: false,
       buttonData: [
@@ -450,7 +425,12 @@ export default {
         {
           name: '部门',
           event: 'deptClick'
-        }
+        },
+          {
+              name: '审批',
+              event: "check",
+              display:'scope.row.isApproval',
+          },
       ]
     }
   },
@@ -462,11 +442,26 @@ export default {
     }
   },
   mounted() {
-    this.list()
+      this.list()
       this.init();
   },
   methods: {
-
+      findApprovals(row) {
+          this.orgName = row.orgName;
+          let query = {
+              codeType:"ORG_APPROVAL_STATE",
+              associationId:row.id
+          }
+          approvalModel.findApprovalsInfo(query).then(data => {
+              this.approvalList = data.entity
+              this.editFormVisible1 = true
+          })
+      },
+      check(row) {
+          this.editForm = row
+          this.editForm.codeName = "ORG_APPROVAL_STATE";
+          this.checkEditFormVisible = true
+      },
       init(){
           orgModel.orgAll().then(data => {
               this.orgs = data.entity;
@@ -482,14 +477,13 @@ export default {
               this.arrStates = data.entity;
           })
           codeExplainContent.getAllByCodeNo("ORG_APPROVAL_STATE").then(data => {
-              this.arrApplyStates = data.entity;
+              this.arrApprovalStates = data.entity;
           })
 
       },
 
       changeProvince(){
           let id = this.entity.provinceId;
-       //   this.entity.cityId = ""
           this.$set(this.entity,'cityId','')
           this.arrCitys = []
           let query = {
@@ -565,17 +559,6 @@ export default {
       })
     },
 
-
-      editClicks(row) {
-
-          model.load('org', row.id).then(data => {
-              this.mode = 'update'
-              this.editForm = data.entity
-              this.editFormVisible1 = true
-          })
-
-      },
-
     deleteClick(row) {
       if (row.users && row.users.length > 0) {
         Notification({
@@ -608,6 +591,16 @@ export default {
         this.expands.push(row.id)
       }
     },
+
+      checkoutStatusFinish() {
+          this.checkEditFormVisible = false
+          this.list()
+      },
+      checkoutStatusCancel() {
+          this.checkEditFormVisible = false
+          this.list()
+      },
+
     removeUser(row) {
       this.$store.commit('startLoading')
       orgModel.removeUser(row.id, this.org.id).then(data => {

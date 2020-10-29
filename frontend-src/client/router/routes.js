@@ -65,6 +65,11 @@ export const constantRouterMap = [
         path: '/receipt',
         component: () => import('@/views/index/ship/receipt/index.vue'),
         name: 'receipt'
+    },
+    {
+        path: '/register',
+        component: () => import('@/views/register/index.vue'),
+        name: 'register'
     }
 ]
 

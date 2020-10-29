@@ -7,24 +7,8 @@
                         <el-form :inline="true" id="projectList" :model="projectQuery" ref="projectQuery">
                             <el-form-item prop="projectName">
                                 <el-input
-                                        placeholder="项目名称"
-                                        v-model="projectQuery.projectName"
-                                        style="width:150px"
-                                        clearable
-                                ></el-input>
-                            </el-form-item>
-                            <el-form-item prop="customer">
-                                <el-input
-                                        placeholder="建设单位"
-                                        v-model="projectQuery.customer"
-                                        style="width:150px"
-                                        clearable
-                                ></el-input>
-                            </el-form-item>
-                            <el-form-item prop="workPlace">
-                                <el-input
-                                        placeholder="项目地址"
-                                        v-model="projectQuery.workPlace"
+                                        placeholder="地块编号"
+                                        v-model="projectQuery.projectNo"
                                         style="width:150px"
                                         clearable
                                 ></el-input>
@@ -89,39 +73,30 @@
                         :rowIndex:="this.rowIndex"
                         router-link
                 >
+                    <el-table-column type="expand">
+                        <template slot-scope="props">
+                            <el-form label-position="left" inline class="demo-table-expand">
+                                <el-form-item label="地块编号"><span>{{ props.row.projectNo }}</span></el-form-item>
+                                <el-form-item label="地块数量"><span>{{ props.row.landNum }}</span></el-form-item>
+                                <el-form-item label="结构类型"><span>{{ props.row.structuralStyle }}</span></el-form-item>
+                                <el-form-item label="配建面积"><span>{{ props.row.constructionArea }}</span></el-form-item>
+                                <el-form-item label="当年拟落实面积"><span>{{ props.row.implementedArea }}</span></el-form-item>
+                                <el-form-item label="全/精装修面积"><span>{{ props.row.decorationArea }}</span></el-form-item>
+                                <el-form-item label="EPC项目个数"><span>{{ props.row.epcNum }}</span></el-form-item>
+                                <el-form-item label="省"><span>{{ props.row.provinceName }}</span></el-form-item>
+                                <el-form-item label="市"><span>{{ props.row.cityName }}</span></el-form-item>
+                                <el-form-item label="审批状态"><span>{{ props.row.approvalStatus }}</span></el-form-item>
+                            </el-form>
+                        </template>
+                    </el-table-column>
                     <el-table-column type="index" label="序号" width="50"></el-table-column>
-                    <el-table-column prop="projectNo" label="项目编号" width="150"></el-table-column>
-                    <el-table-column prop="projectName" label="项目名称" width="150"></el-table-column>
-                    <el-table-column prop="workPlace" label="项目地址" width="150"></el-table-column>
-                    <el-table-column prop="customer" label="建设单位" width="150"></el-table-column>
-                    <el-table-column prop="productionUnit" label="构件生产单位" width="100"></el-table-column>
-                    <el-table-column prop="assemblyRate" label="装配率" width="100"></el-table-column>
-                    <el-table-column prop="undertaking" label="施工单位" width="150"></el-table-column>
-                    <el-table-column prop="projectScale" label="工程类型" width="100"></el-table-column>
-
-                    <el-table-column prop="structuralStyle" label="结构形式" ></el-table-column>
-                    <el-table-column prop="startDate" label="开始时间" width="100"></el-table-column>
-                    <el-table-column prop="endDate" label="结束时间" width="100"></el-table-column>
-                    <el-table-column prop="projectProgress" label="工程进度" width="100"></el-table-column>
-                    <el-table-column prop="isFullDecoration" label="是否为全装修或装配化装修">
-                        <template slot-scope="scope">
-                            <span v-if="scope.row.isFullDecoration">是</span>
-                            <span v-else>否</span>
-                        </template>
-                    </el-table-column>
-                    <el-table-column prop="isInvested" label="是否为政府投资工程">
-                        <template slot-scope="scope">
-                            <span v-if="scope.row.isInvested">是</span>
-                            <span v-else>否</span>
-                        </template>
-                    </el-table-column>
-
-                    <el-table-column prop="isEPC" label="是否采用工程总承包(EPC)">
-                        <template slot-scope="scope">
-                            <span v-if="scope.row.isEPC">是</span>
-                            <span v-else>否</span>
-                        </template>
-                    </el-table-column>
+                    <el-table-column prop="projectNo" label="地块编号" width="150"></el-table-column>
+                    <el-table-column prop="landNum" label="地块数量" width="150"></el-table-column>
+                    <el-table-column prop="structuralStyle" label="结构类型" width="150"></el-table-column>
+                    <el-table-column prop="constructionArea" label="配建面积" width="150"></el-table-column>
+                    <el-table-column prop="implementedArea" label="当年拟落实面积" width="100"></el-table-column>
+                    <el-table-column prop="decorationArea" label="全/精装修面积" width="100"></el-table-column>
+                    <el-table-column prop="epcNum" label="EPC项目个数" width="150"></el-table-column>
                     <el-table-column prop="provinceName" label="省" ></el-table-column>
                     <el-table-column prop="cityName" label="市"></el-table-column>
                     <el-table-column prop="approvalStatus" align="center" label="审批状态">
@@ -131,6 +106,7 @@
                             </a>
                         </template>
                     </el-table-column>
+
                     <el-table-column label="操作"
                                      fixed="right"
                                      :width="rowButtonGroupWidth(rowButtonData)">
@@ -159,7 +135,7 @@
             </el-footer>
         </el-container>
         <el-dialog
-                :title="mode=='add'?'新建项目':'编辑项目'"
+                :title="mode=='add'?'新建储备项目':'编辑储备项目'"
                 v-if="editFormVisible"
                 :visible.sync="editFormVisible"
         >
@@ -170,7 +146,6 @@
                     @model-edit-cancel="projectEditCancel"
             ></model-edit>
         </el-dialog>
-
 
         <!--送检-->
         <el-dialog
@@ -217,9 +192,9 @@
     import clientModel from "../../../../model/client-model";
     import codeExplainContent from '../../../../model/basicdata/codeExlpainContent'
     import deptModel from '../../../../model/basicdata/dept'
-    import projectModel from "../../../../model/project/project";
+    import projectModel from "../../../../model/project/reserveproject";
     import {Notification} from "element-ui";
-    import ProjectsEdit from "./ProjectsEdit.vue";
+    import ProjectsEdit from "./ReserveProjectsEdit.vue";
     import CheckoutStatus from '../ApprovalStatus.vue';
     import moment from "moment";
 
@@ -238,10 +213,10 @@
                 arrBuilding: [],
                 dataBuild: [],
                 dataHouseType: [],
+                show: "",
                 approvalList:[],
                 orgName:"",
                 editFormVisible1:false,
-                show: "",
                 projectQuery: {
                     projectName: "",
                     customer: "",
@@ -295,7 +270,7 @@
                     {
                         name: '审批',
                         event: "check",
-                       display:'scope.row.isApproval',
+                        display:'scope.row.isApproval',
                     },
                 ]
             };
@@ -304,7 +279,7 @@
             findApprovals(row) {
                 this.orgName = row.orgName;
                 let query = {
-                    codeType:"PROJECT_APPROVAL_STATE",
+                    codeType:"RESERVE_PROJECT_APPROVAL_STATE",
                     associationId:row.id
                 }
                 approvalModel.findApprovalsInfo(query).then(data => {
@@ -314,11 +289,12 @@
             },
             check(row) {
                 this.editForm = row
-                this.editForm.codeName = "PROJECT_APPROVAL_STATE";
+                this.editForm.codeName = "RESERVE_PROJECT_APPROVAL_STATE";
                 this.checkEditFormVisible = true
             },
             changeProvince(){
                 let id = this.projectQuery.provinceId;
+                //   this.entity.cityId = ""
                 this.$set(this.projectQuery,'cityId','')
                 this.arrCitys = []
                 let query = {
@@ -335,7 +311,7 @@
                     this.arrProvinces = data.entity;
                 })
 
-                codeExplainContent.getAllByCodeNo("PROJECT_APPROVAL_STATE").then(data => {
+                codeExplainContent.getAllByCodeNo("RESERVE_PROJECT_APPROVAL_STATE").then(data => {
                     this.arrApprovalStates = data.entity;
                 })
 
@@ -372,9 +348,18 @@
             resetForm(formName) {
                 this.$refs[formName].resetFields();
             },
+
+            checkoutStatusFinish() {
+                this.checkEditFormVisible = false
+                this.projectList()
+            },
+            checkoutStatusCancel() {
+                this.checkEditFormVisible = false
+                this.projectList()
+            },
             addClick() {
                 this.mode = "add";
-                let approvalStatus =  "市级审批中"
+                let approvalStatus =  "省级审批中"
                 if(this.arrApprovalStates.length>0){
                     approvalStatus = this.arrApprovalStates[0].codeName;
                 }
@@ -425,47 +410,6 @@
                     .catch(() => {
                     });
             },
-            deletesClick() {
-                if (this.selected.length == 0) {
-                    this.$message("请选择删除项");
-                    return;
-                }
-                let ids = [];
-                this.selected.forEach(row => {
-                    ids.push(row.id);
-                });
-                this.$confirm("此操作将永久删除勾选项目, 是否继续?", "提示", {
-                    confirmButtonText: "确定",
-                    cancelButtonText: "取消",
-                    type: "warning"
-                })
-                    .then(() => {
-                        const loading = this.$loading({
-                            lock: true,
-                            text: "Loading",
-                            spinner: "el-icon-loading",
-                            background: "rgba(0, 0, 0, 0.7)"
-                        });
-                        projectModel.projectDeletes(ids.join(";")).then(data => {
-                            if (data.status == "fail") {
-                                Notification({
-                                    message: data.msg,
-                                    type: "warning"
-                                });
-                                loading.close();
-                                return;
-                            }
-                            Notification({
-                                message: "删除成功",
-                                type: "success"
-                            });
-                            loading.close();
-                            this.projectList();
-                        });
-                    })
-                    .catch(() => {
-                    });
-            },
             projectList() {
                 projectModel.projectList(this.projectQuery).then(data => {
                     let projects = data.entity.content;
@@ -485,20 +429,38 @@
                 this.projectQuery.pageInfo.currentPage = val;
                 this.projectList();
             },
-
+            handlebriefCol() {
+                this.show = false;
+            },
+            handleAllCol() {
+                this.show = true;
+            },
             // 点击整行都可以进行勾选
             clickRow(row) {
                 this.$refs.moviesTable.toggleRowSelection(row)
             },
-            checkoutStatusFinish() {
-                this.checkEditFormVisible = false
-                this.projectList()
+            downloadFinish() {
+                this.editFormDownloadVisible = false
             },
-            checkoutStatusCancel() {
-                this.checkEditFormVisible = false
-                this.projectList()
-            }
+            downloadCancel() {
+                this.editFormDownloadVisible = false
+            },
         },
 
     };
 </script>
+
+<style>
+    .demo-table-expand {
+        font-size: 0;
+    }
+    .demo-table-expand label {
+        width: 90px;
+        color: #99a9bf;
+    }
+    .demo-table-expand .el-form-item {
+        margin-right: 0;
+        margin-bottom: 0;
+        width: 50%;
+    }
+</style>

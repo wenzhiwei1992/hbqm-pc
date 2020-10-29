@@ -43,6 +43,11 @@ public class Org extends CommonProperties {
     @Column(name = "approval_status")
     private String approvalStatus;
 
+    /**
+     * 审批部门
+     */
+    @Column(name = "approval_dept_id")
+    private Long approvalDeptId;
 
     @Column(name = "province_id")
     private Long provinceId;
@@ -86,4 +91,6 @@ public class Org extends CommonProperties {
     @JsonInclude()
     @Transient
     private List<Long> orgIds;
+    @Transient
+    private Boolean isApproval;
 }

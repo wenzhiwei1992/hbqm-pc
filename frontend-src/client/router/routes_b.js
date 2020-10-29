@@ -614,12 +614,6 @@ export const constantRouterMap = [
                 name: 'productChange',
                 meta: {title: 'BOM变更查询-构件', isTab: true}
             },
-            /*{
-                path: '/project/productTrack',
-                component: () => import('../views/index/project/projectTrack/ProductTrack.vue'),
-                name: 'productTrack',
-                meta: {title: '订单总进度', isTab: true}
-            },*/
             {
                 path: '/project/projectTrack',
                 component: () => import('../views/index/project/projectTrack/ProjectTrack.vue'),
@@ -1175,6 +1169,12 @@ export const constantRouterMap = [
         component: () => import('../views/index/ship/receipt/index.vue'),
         name: 'receipt'
     },
+{
+    path: '/register',
+        component: () => import('@/views/register/index.vue'),
+    name: 'register'
+}
+
 ]
 
 export default new Router({

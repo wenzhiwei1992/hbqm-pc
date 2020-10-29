@@ -70,7 +70,13 @@ public enum DictEnum {
      * 半成品出库
      */
     SFG_PICKING_STATUS,
-    /*生产方式*/
-    PRODUCTION;
+    /**生产方式*/
+    PRODUCTION,
+    /**项目工程结构形式*/
+    ORG_APPROVAL_STATE,
+    /**储备项目审批状态*/
+    RESERVE_PROJECT_APPROVAL_STATE,
+    /**项目审批状态*/
+    PROJECT_APPROVAL_STATE;
 
 }

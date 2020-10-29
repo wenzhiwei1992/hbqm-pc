@@ -3,16 +3,15 @@ package com.smartpc.chiyun.controller.user;
 import com.smartpc.chiyun.aop.Log;
 import com.smartpc.chiyun.config.AppUtil;
 import com.smartpc.chiyun.dao.dept.DepartmentDao;
-import com.smartpc.chiyun.dao.syscode.CodeExplainContentDao;
 import com.smartpc.chiyun.dao.user.OrgDao;
-import com.smartpc.chiyun.model.dept.Department;
-import com.smartpc.chiyun.service.sys.service.FileService;
-import com.smartpc.chiyun.service.user.OrgService;
-
+import com.smartpc.chiyun.enums.DictEnum;
 import com.smartpc.chiyun.model.BaseQuery;
+import com.smartpc.chiyun.model.dept.Department;
 import com.smartpc.chiyun.model.sys.SR;
 import com.smartpc.chiyun.model.user.Org;
 import com.smartpc.chiyun.model.user.User;
+import com.smartpc.chiyun.service.sys.service.FileService;
+import com.smartpc.chiyun.service.user.OrgService;
 import com.smartpc.chiyun.vo.ResultVO;
 import com.smartpc.chiyun.voutils.ResultVOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +20,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -131,12 +130,42 @@ public class OrgController {
     @RequestMapping(value = "/org/add", method = RequestMethod.POST)
     public SR<Org> add(@RequestBody Org entity) {
         SR<Org> sr = new SR<>();
-        String OrgName = entity.getOrgName();
-        if (StringUtils.isEmpty(OrgName)) {
-            sr.setMsg("名称不能为空");
+        if (StringUtils.isEmpty(entity.getOrgName())) {
+            sr.setMsg("组织名称不能为空");
             return sr;
         }
+        if (StringUtils.isEmpty(entity.getProposerPhone())) {
+            sr.setMsg("申请人手机号不能为空");
+            return sr;
+        }
+        List<Org> orgs = d.findOrgByProposerPhoneOrnameAndOrgName(entity.getProposerPhone(),entity.getOrgName());
+        if(orgs!=null && orgs.size()>0){
+            if(orgs.get(0).getOrgName().equals(entity.getOrgName())){
+                sr.setMsg("已存在组织名称为"+entity.getOrgName()+"的组织，请检查或直接登录");
+                sr.setStatus(SR.FAIL);
+                return sr;
+            }else if(orgs.get(0).getProposerPhone().equals(entity.getProposerPhone())){
+                sr.setMsg("该手机号下已存在已存在组织名称为"+orgs.get(0).getOrgName()+"的组织，请检查或直接登录");
+                sr.setStatus(SR.FAIL);
+                return sr;
+            }
+        }
         Org save = d.save(entity);
+        d.insertApproval(entity.getProposer(),
+                entity.getProposer(),
+                new Date(),
+                new Date(),
+                entity.getProposer(),
+                entity.getProposer(),
+                entity.getId(),
+                "提交审批",
+                "提交审批",
+                entity.getId(),
+                entity.getCityId(),
+                DictEnum.ORG_APPROVAL_STATE.name(),
+                entity.getId(),
+                entity.getOrgDesc(),
+                entity.getCityId() );
         sr.setEntity(save);
         sr.setStatus(SR.SUCCESS);
         return sr;
@@ -194,5 +223,4 @@ public class OrgController {
         List<Org> orgList = orgService.findOrgByUser();
         return ResultVOUtils.success(orgList);
     }
-
 }

@@ -5,41 +5,8 @@
             <el-form-item label="项目编号" prop="projectNo">
                 <el-input  onkeyup="value=value.replace(/[^A-Za-z0-9]/g,'')"  v-model="editForm.projectNo"></el-input>
             </el-form-item>
-            <el-form-item label="项目名称" prop="projectName">
-                <el-input v-model="editForm.projectName"></el-input>
-            </el-form-item>
-            <el-form-item label="项目地址" prop="workPlace">
-                <el-input v-model="editForm.workPlace"></el-input>
-            </el-form-item>
-            <el-form-item label="建设单位" prop="customer">
-                <el-input v-model="editForm.customer"></el-input>
-            </el-form-item>
-            <el-form-item label="构件生产单位" prop="productionUnit">
-                <el-input v-model="editForm.productionUnit"></el-input>
-            </el-form-item>
-
-            <el-form-item label="施工单位" prop="undertaking">
-                <el-input v-model="editForm.undertaking"></el-input>
-            </el-form-item>
-
-
-            <el-form-item label="工程规模(层数、面积)" prop="projectScale">
-                <el-input v-model="editForm.projectScale"></el-input>
-            </el-form-item>
-
-
-            <el-form-item label="工程类型" prop="projectType">
-                <el-select v-model="editForm.projectType" clearable placeholder="请选择">
-                    <el-option v-for="item in arrProjectType"
-                               :key="item.id"
-                               :label="item.codeName"
-                               :value="item.codeName"
-                    ></el-option>
-                </el-select>
-            </el-form-item>
-
-            <el-form-item label="装配率" prop="assemblyRate"  @keyup.native="parseValue()" >
-                <el-input v-model="editForm.assemblyRate"></el-input>
+            <el-form-item label="地块数量" prop="landNum">
+                <el-input v-model="editForm.landNum"></el-input>
             </el-form-item>
 
 
@@ -53,45 +20,19 @@
                 </el-select>
             </el-form-item>
 
-
-            <el-form-item label="开工时间" prop="startDate">
-                <el-date-picker
-                        v-model="editForm.startDate"
-                        type="date"
-                        placeholder="选择开始时间"
-                        value-format="yyyy-MM-dd">
-                </el-date-picker>
-            </el-form-item>
-            <el-form-item label="竣工时间" prop="endDate">
-                <el-date-picker
-                        v-model="editForm.endDate"
-                        type="date"
-                        placeholder="选择结束时间"
-                        value-format="yyyy-MM-dd">
-                </el-date-picker>
+            <el-form-item label="配建面积" prop="constructionArea"  @keyup.native="parseValue()" >
+                <el-input v-model="editForm.constructionArea"></el-input>
             </el-form-item>
 
-            <el-form-item label="工程进度" prop="projectProgress">
-                <el-input v-model="editForm.projectProgress"></el-input>
+            <el-form-item label="当年拟落实面积" prop="implementedArea"  @keyup.native="parseValue1()" >
+                <el-input v-model="editForm.implementedArea"></el-input>
             </el-form-item>
-
-
-            <el-form-item label="是否为全装修或装配化装修" prop="isFullDecoration" >
-                <el-radio v-model="editForm.isFullDecoration" :label="true" >是</el-radio>
-                <el-radio v-model="editForm.isFullDecoration" :label="false">否</el-radio>
+            <el-form-item label="全/精装修面积" prop="decorationArea"  @keyup.native="parseValue2()" >
+                <el-input v-model="editForm.decorationArea"></el-input>
             </el-form-item>
-
-
-            <el-form-item label="是否为政府投资工程" prop="isInvested">
-                <el-radio v-model="editForm.isInvested" :label="true" >是</el-radio>
-                <el-radio v-model="editForm.isInvested" :label="false">否</el-radio>
+            <el-form-item label="EPC项目个数" prop="epcNum">
+                <el-input v-model="editForm.epcNum"></el-input>
             </el-form-item>
-
-            <el-form-item label="是否采用工程总承包(EPC)" prop="isEPC" >
-                <el-radio v-model="editForm.isEPC" :label="true" >是</el-radio>
-                <el-radio v-model="editForm.isEPC" :label="false">否</el-radio>
-            </el-form-item>
-
 
             <el-form-item label="省" prop="provinceId">
                 <el-select  v-model="editForm.provinceId" placeholder="请选择" clearable  @change="changeProvince">
@@ -113,8 +54,6 @@
                 </el-select>
             </el-form-item>
 
-
-
             <el-form-item  label="审批状态" prop="approvalStatus">
                 <el-select  v-model="editForm.approvalStatus" disabled clearable placeholder="审批状态">
                     <el-option v-for="item in arrApprovalStates"
@@ -135,7 +74,7 @@
 </template>
 
 <script>
-    import projectModel from '../../../../model/project/project'
+    import projectModel from '../../../../model/project/reserveproject'
     import {Notification} from 'element-ui'
     import serviceConfig from '../../../../../server.config.js'
     import codeExplainContent from '../../../../model/basicdata/codeExlpainContent'
@@ -148,55 +87,25 @@
             return{
                 eidtFormRules: {
                     projectNo: [
-                        {required: true, message: '请输入项目编号', trigger: 'blur'},
+                        {required: true, message: '请输入地块编号', trigger: 'blur'},
                     ],
-                    projectName: [
-                        {required: true, message: '请输入项目名称', trigger: 'blur'},
+                    landNum: [
+                        {required: true, message: '请输入地块数量', trigger: 'blur'},
                     ],
-                    workPlace: [
-                        {required: true, message: '请输入项目地址', trigger: 'blur'},
-                    ],
-                    customer: [
-                        {required: true, message: '请输入建设单位', trigger: 'blur'},
-                    ],
-                    assemblyRate: [
-                        {required: true, message: '请输入装备率', trigger: 'blur'},
-                    ],
-                    productionUnit: [
-                        {required: true, message: '请输入构件生产单位', trigger: 'blur'},
-                    ],
-                    undertaking: [
-                        {required: true, message: '请输入施工单位', trigger: 'blur'},
-                    ],
-                    projectScale: [
-                        {required: true, message: '请输入工程规模(层数、面积)', trigger: 'blur'},
-                    ],
-
-                    projectType: [
-                        {required: true,message: '请选择工程类型', trigger: 'blur'},
-                    ],
-
                     structuralStyle: [
-                        {required: true,message: '请选择结构形式', trigger: 'blur'},
+                        {required: true, message: '请输入结构类型', trigger: 'blur'},
                     ],
-
-                    startDate: [
-                        {required: true,message: '请选择项目开始时间', trigger: 'blur'},
+                    constructionArea: [
+                        {required: true, message: '请输入配建面积', trigger: 'blur'},
                     ],
-                    endDate: [
-                        {required: true,message: '请输入项目结束时间', trigger: 'blur'},
+                    implementedArea: [
+                        {required: true, message: '请输入当年拟落实面积', trigger: 'blur'},
                     ],
-                    projectProgress: [
-                         {required: true,message: '请输入工程进度', trigger: 'blur'},
-                     ],
-                    isFullDecoration: [
-                        {required: true,message: '请选择是否为全装修或装配化装修', trigger: 'blur'},
+                    decorationArea: [
+                        {required: true, message: '请输入全/精装修面积', trigger: 'blur'},
                     ],
-                    isInvested: [
-                        {required: true,message: '请选择是否为政府投资工程', trigger: 'blur'},
-                    ],
-                    isEPC: [
-                        {required: true,message: '请选择是否采用工程总承包(EPC)', trigger: 'blur'},
+                    epcNum: [
+                        {required: true, message: 'EPC项目个数', trigger: 'blur'},
                     ],
                     provinceId: [
                         {required: true,message: '请选择省', trigger: 'blur'},
@@ -225,12 +134,23 @@
             }
         },
         mounted() {
-
             this.init();
         },
         methods:{
-            parseValue() {
-                let value = this.editForm.assemblyRate;
+        parseValue2() {
+            let value = this.editForm.decorationArea;
+            value = value.replace(/[^(\-)*\d.]/g, ""); // 清除"数字"和"."以外的字符
+            value = value.replace(/^\./g, ""); // 验证第一个字符是数字而不是
+            value = value.replace(/\.{2,}/g, "."); // 只保留第一个. 清除多余的
+            value = value.replace(".", "$#$").replace(/\./g, "").replace("$#$",
+                ".");
+            value = value.replace("-", "$#$").replace(/\-/g, "").replace("$#$",
+                "-");
+            value = value.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3'); // 只能输入3个小数
+            this.editForm.decorationArea = value;
+        },
+            parseValue1() {
+                let value = this.editForm.implementedArea;
                 value = value.replace(/[^(\-)*\d.]/g, ""); // 清除"数字"和"."以外的字符
                 value = value.replace(/^\./g, ""); // 验证第一个字符是数字而不是
                 value = value.replace(/\.{2,}/g, "."); // 只保留第一个. 清除多余的
@@ -239,7 +159,19 @@
                 value = value.replace("-", "$#$").replace(/\-/g, "").replace("$#$",
                     "-");
                 value = value.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3'); // 只能输入3个小数
-                this.editForm.assemblyRate = value;
+                this.editForm.implementedArea = value;
+            },
+            parseValue() {
+                let value = this.editForm.constructionArea;
+                value = value.replace(/[^(\-)*\d.]/g, ""); // 清除"数字"和"."以外的字符
+                value = value.replace(/^\./g, ""); // 验证第一个字符是数字而不是
+                value = value.replace(/\.{2,}/g, "."); // 只保留第一个. 清除多余的
+                value = value.replace(".", "$#$").replace(/\./g, "").replace("$#$",
+                    ".");
+                value = value.replace("-", "$#$").replace(/\-/g, "").replace("$#$",
+                    "-");
+                value = value.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3'); // 只能输入3个小数
+                this.editForm.constructionArea = value;
             },
             init(){
                 deptModel.findDepartmentByLevel(0).then(data => {

@@ -77,7 +77,7 @@ public class CodeExplainContentServiceImpl implements CodeExplainContentService 
 
     @Override
     public List<CodeExplainContent> findAllByCodeNo(String codeNo) {
-        List<CodeExplainContent> list = codeExplainContentDao.findAllByCodeNo(codeNo);
+        List<CodeExplainContent> list = codeExplainContentDao.findAllByCodeNoOrderBySort(codeNo);
         return list;
     }
 

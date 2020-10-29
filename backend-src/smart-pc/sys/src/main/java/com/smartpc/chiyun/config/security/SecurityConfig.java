@@ -92,6 +92,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/doc.html",
                         "/invoice/findInvoiceChkInfo",
                         "/indexMap/**",
+                        "/basicdata/department/findDepartmentBylevel/**",
+                        "/basicdata/codeExplainContent/getByCodeNo/**",
+                        "/basicdata/department/findDepartmentsByParentId",
+                        "/org/add",
                         "/statistic/getIndexMapOrg"
                 ).permitAll()
                 // 阿里巴巴 druid

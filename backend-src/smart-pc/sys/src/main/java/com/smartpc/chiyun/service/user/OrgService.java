@@ -2,9 +2,13 @@ package com.smartpc.chiyun.service.user;
 
 import com.smartpc.chiyun.config.AppUtil;
 import com.smartpc.chiyun.config.PageInfo;
+import com.smartpc.chiyun.dao.dept.DepartmentDao;
+import com.smartpc.chiyun.dao.syscode.CodeExplainContentDao;
 import com.smartpc.chiyun.dao.user.OrgDao;
 import com.smartpc.chiyun.dao.user.UserDao;
+import com.smartpc.chiyun.enums.DictEnum;
 import com.smartpc.chiyun.model.BaseQuery;
+import com.smartpc.chiyun.model.syscode.CodeExplainContent;
 import com.smartpc.chiyun.model.user.Org;
 import com.smartpc.chiyun.model.user.User;
 import com.smartpc.chiyun.utils.StringUtil;
@@ -25,8 +29,12 @@ import java.util.function.Consumer;
 public class OrgService {
     @Autowired
     OrgDao orgDao;
+
     @Autowired
     UserDao userDao;
+
+    @Autowired
+    CodeExplainContentDao codeExplainContentDao;
 
     @Transactional
     public Org save(Org entity) {
@@ -101,6 +109,29 @@ public class OrgService {
                 return null;
             }
         }, pageable);
+
+        User u = AppUtil.getCurrentUser();
+        List<Org> content = list.getContent();
+        List<CodeExplainContent> codes =  codeExplainContentDao.findAllByCodeNoOrderBySort(DictEnum.ORG_APPROVAL_STATE.name());
+        for (Org g : content) {
+            if(codes.size()==0  || codes.get(codes.size()-1).getCodeName().equals(g.getApprovalStatus())){
+                g.setIsApproval(false);
+            }else{
+                if (User.ADMIN.equals(user.getLevel())) { // 超级管理员查看全部
+                    g.setIsApproval(true);
+                } else if (User.ORG.equals(user.getLevel())) { // 省市管理员看对应的省市
+                    if (user.getDeptId().equals(g.getApprovalDeptId())) {
+                        g.setIsApproval(true);
+                    } else {
+                        g.setIsApproval(false);
+                    }
+                } else { // 普通用户
+                    g.setIsApproval(false);
+                }
+            }
+
+         }
+
         return list;
     }
 
