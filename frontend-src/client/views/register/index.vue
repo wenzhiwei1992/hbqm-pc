@@ -83,7 +83,20 @@
               >
           </el-input>
         </el-form-item>
+
+
+        <el-form-item  label="审批状态" prop="approvalStatus">
+          <el-select  v-model="editForm.approvalStatus" disabled clearable placeholder="审批状态">
+            <el-option v-for="item in arrApprovalStates"
+                       :key="item.id"
+                       :label="item.codeName"
+                       :value="item.codeName"
+            ></el-option>
+          </el-select>
+        </el-form-item>
       </el-form>
+
+
     </div>
     <div class="footer">
       <el-button class="btn" type="primary" size="medium" @click="editFormSubmmit('editForm')">立即注册</el-button>
@@ -108,6 +121,7 @@ export default {
         arrCitys: [],
         arrProductions: [],
         arrStates: [],
+        arrApprovalStates:[],
       eidtFormRules: {
         orgName: [
           {required: true, message: '请输入组织名称', trigger: 'blur'},
@@ -185,6 +199,14 @@ export default {
 
           codeExplainContent.getAllByCodeNo("ORG_STATE").then(data => {
               this.arrStates = data.entity;
+          })
+          codeExplainContent.getAllByCodeNo("ORG_APPROVAL_STATE").then(data => {
+              this.arrApprovalStates = data.entity;
+              let approvalStatus =  "市级审批中"
+              if(this.arrApprovalStates.length>0){
+                  approvalStatus = this.arrApprovalStates[0].codeName;
+              }
+              this.editForm.approvalStatus = approvalStatus;
           })
           this.getCity();
       },

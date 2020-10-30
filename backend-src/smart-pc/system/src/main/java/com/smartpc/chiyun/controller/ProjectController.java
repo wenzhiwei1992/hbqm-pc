@@ -4,10 +4,13 @@ package com.smartpc.chiyun.controller;
 import com.smartpc.chiyun.aop.Log;
 import com.smartpc.chiyun.config.AppUtil;
 import com.smartpc.chiyun.dao.ProjectDao;
+import com.smartpc.chiyun.enums.DictEnum;
 import com.smartpc.chiyun.exception.DataNotFoundException;
+import com.smartpc.chiyun.model.Approval;
 import com.smartpc.chiyun.model.Project;
 import com.smartpc.chiyun.model.query.ProjectQuery;
 import com.smartpc.chiyun.model.sys.SR;
+import com.smartpc.chiyun.service.ApprovalService;
 import com.smartpc.chiyun.service.ProjectService;
 import com.smartpc.chiyun.vo.ResultVO;
 import com.smartpc.chiyun.voutils.ResultVOUtils;
@@ -26,6 +29,9 @@ public class ProjectController {
     ProjectDao projectDao;
     @Autowired
     ProjectService projectService;
+
+    @Autowired
+    ApprovalService approvalService;
 
     @RequestMapping(value = "/project/{id}", method = RequestMethod.GET)
     public ResultVO getProjectById(@PathVariable Long id) {
@@ -143,6 +149,16 @@ public class ProjectController {
             return ResultVOUtils.error(SR.FAIL, e.getMsg());
         }
         Project save = projectDao.save(project);
+
+        Approval detail = new Approval();
+        detail.setAssociationId(project.getId());
+        detail.setCodeType(DictEnum.PROJECT_APPROVAL_STATE.name());
+        detail.setCityId(save.getCityId());
+        detail.setProvinceId(save.getProvinceId());
+        detail.setReason("项目申报");
+        detail.setApprovalDeptId(save.getCityId());
+        detail.setApprovalerId(AppUtil.getCurrentUser().getId());
+        approvalService.saveApprovalByFirst(detail);
         sr.setEntity(save);
         sr.setStatus(SR.SUCCESS);
         return ResultVOUtils.success(save);

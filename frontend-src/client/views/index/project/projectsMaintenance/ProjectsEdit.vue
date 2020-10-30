@@ -11,6 +11,10 @@
             <el-form-item label="项目地址" prop="workPlace">
                 <el-input v-model="editForm.workPlace"></el-input>
             </el-form-item>
+            <el-form-item label="经纬度" prop="longitude">
+                <el-input v-model="editForm.longitude"></el-input>
+                <a href="http://lbs.amap.com/console/show/picker" target="_blank" style="color: #00CC99;line-height: 30px;">+选择经纬度</a>
+            </el-form-item>
             <el-form-item label="建设单位" prop="customer">
                 <el-input v-model="editForm.customer"></el-input>
             </el-form-item>
@@ -22,12 +26,6 @@
                 <el-input v-model="editForm.undertaking"></el-input>
             </el-form-item>
 
-
-            <el-form-item label="工程规模(层数、面积)" prop="projectScale">
-                <el-input v-model="editForm.projectScale"></el-input>
-            </el-form-item>
-
-
             <el-form-item label="工程类型" prop="projectType">
                 <el-select v-model="editForm.projectType" clearable placeholder="请选择">
                     <el-option v-for="item in arrProjectType"
@@ -38,8 +36,16 @@
                 </el-select>
             </el-form-item>
 
-            <el-form-item label="装配率" prop="assemblyRate"  @keyup.native="parseValue()" >
+            <el-form-item label="工程规模(层数、面积)" prop="projectScale" @keyup.native="parseValue1()">
+                <el-input v-model="editForm.projectScale"></el-input>
+            </el-form-item>
+
+
+            <el-form-item label="装配面积" prop="assemblyArea"  @keyup.native="parseValue()" >
                 <el-input v-model="editForm.assemblyRate"></el-input>
+            </el-form-item>
+            <el-form-item label="装配率" prop="assemblyRate"   >
+                <el-input v-model="editForm.assemblyRate" disabled></el-input>
             </el-form-item>
 
 
@@ -159,8 +165,8 @@
                     customer: [
                         {required: true, message: '请输入建设单位', trigger: 'blur'},
                     ],
-                    assemblyRate: [
-                        {required: true, message: '请输入装备率', trigger: 'blur'},
+                    assemblyArea: [
+                        {required: true, message: '请输入装配面积率', trigger: 'blur'},
                     ],
                     productionUnit: [
                         {required: true, message: '请输入构件生产单位', trigger: 'blur'},
@@ -229,8 +235,9 @@
             this.init();
         },
         methods:{
-            parseValue() {
-                let value = this.editForm.assemblyRate;
+
+            parseValue1() {
+                let value = this.editForm.projectScale;
                 value = value.replace(/[^(\-)*\d.]/g, ""); // 清除"数字"和"."以外的字符
                 value = value.replace(/^\./g, ""); // 验证第一个字符是数字而不是
                 value = value.replace(/\.{2,}/g, "."); // 只保留第一个. 清除多余的
@@ -239,7 +246,25 @@
                 value = value.replace("-", "$#$").replace(/\-/g, "").replace("$#$",
                     "-");
                 value = value.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3'); // 只能输入3个小数
-                this.editForm.assemblyRate = value;
+                this.editForm.projectScale = value;
+                if( this.editForm.assemblyArea){
+                    this.editForm.assemblyRate = (parseFloat(this.editForm.assemblyArea)/parseFloat(this.editForm.projectScale))*100
+                }
+            },
+            parseValue() {
+                let value = this.editForm.assemblyArea;
+                value = value.replace(/[^(\-)*\d.]/g, ""); // 清除"数字"和"."以外的字符
+                value = value.replace(/^\./g, ""); // 验证第一个字符是数字而不是
+                value = value.replace(/\.{2,}/g, "."); // 只保留第一个. 清除多余的
+                value = value.replace(".", "$#$").replace(/\./g, "").replace("$#$",
+                    ".");
+                value = value.replace("-", "$#$").replace(/\-/g, "").replace("$#$",
+                    "-");
+                value = value.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3'); // 只能输入3个小数
+                this.editForm.assemblyArea = value;
+                if( this.editForm.projectScale){
+                    this.editForm.assemblyRate = (parseFloat(this.editForm.assemblyArea)/parseFloat(this.editForm.projectScale))*100
+                }
             },
             init(){
                 deptModel.findDepartmentByLevel(0).then(data => {

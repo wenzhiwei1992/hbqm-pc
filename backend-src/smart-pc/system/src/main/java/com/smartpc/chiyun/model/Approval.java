@@ -39,7 +39,7 @@ public class Approval extends CommonProperties {
     private String reason;
 
     @Column(name = "approvaler_id")
-    private Long approvalerId;
+    private Long approvalerId; //审批人
 
     @Transient
     private String nowCodeName;

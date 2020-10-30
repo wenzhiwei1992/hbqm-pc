@@ -170,7 +170,7 @@
 
           <el-table-column
                   prop="longitude"
-                  label="基地经纬度"
+                  label="经纬度"
                   align="center"
           >
           </el-table-column>
@@ -538,6 +538,10 @@ export default {
     //行操作
     addClick() {
       this.mode = 'add'
+        let approvalStatus =  "市级审批中"
+        if(this.arrApprovalStates.length>0){
+            approvalStatus = this.arrApprovalStates[0].codeName;
+        }
       this.editForm = {
           orgDesc:"",
           address:"",
@@ -548,7 +552,12 @@ export default {
           state:"",
           provinceId:"",
           cityId:"",
+          approvalStatus: approvalStatus
       }
+
+
+
+
       this.editFormVisible = true
     },
     editClick(row) {

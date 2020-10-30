@@ -55,10 +55,9 @@ public class ApprovalService {
 
     @Transactional
     public String saveApprovalByFirst(Approval detail) {
-        detail.setApprovalLevel("提交审批");
-        detail.setApprovalerId(AppUtil.getCurrentUser().getId());
-        detail.setApprovalDeptId(detail.getProvinceId());
 
+        detail.setApprovalStatus("提交审批");
+        detail.setApprovalLevel("提交审批");
         approvalDao.save(detail);
         return "success";
     }

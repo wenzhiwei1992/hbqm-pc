@@ -26,15 +26,26 @@ public class Project extends CommonProperties {
     private String customer;//建设单位
     @Column(name = "project_no")
     private String projectNo;
+
+    /**
+     * 经纬度
+     */
+    @Column(name = "longitude")
+    private String longitude;
     /**
      * 构件生产单位
      */
     @Column(name = "production_unit")
     private String productionUnit;
     /**
-     * 装配率
+     * 装配面积
      */
     @Column(name = "assembly_rate",precision = 8,scale = 2)
+    private BigDecimal assemblyArea;
+    /**
+     * 装配率
+     */
+    @Column(name = "assembly_area",precision = 8,scale = 2)
     private BigDecimal assemblyRate;
 
 

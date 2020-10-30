@@ -8,7 +8,7 @@
       <el-form-item label="基地地址" prop="address">
         <el-input v-model="editForm.address"></el-input>
       </el-form-item>
-      <el-form-item label="基地经纬度" prop="longitude">
+      <el-form-item label="经纬度" prop="longitude">
         <el-input v-model="editForm.longitude"></el-input>
         <a href="http://lbs.amap.com/console/show/picker" target="_blank" style="color: #00CC99;line-height: 30px;">+选择经纬度</a>
       </el-form-item>
@@ -89,7 +89,15 @@
       </el-form-item>
 
 
-
+      <el-form-item  label="审批状态" prop="approvalStatus">
+        <el-select  v-model="editForm.approvalStatus" disabled clearable placeholder="审批状态">
+          <el-option v-for="item in arrApprovalStates"
+                     :key="item.id"
+                     :label="item.codeName"
+                     :value="item.codeName"
+          ></el-option>
+        </el-select>
+      </el-form-item>
 
 
     </el-form>
@@ -117,6 +125,7 @@ export default {
         arrProvinces: [],
         arrCitys: [],
         arrProductions: [],
+        arrApprovalStates:[],
         arrStates: [],
       eidtFormRules: {
         orgCode: [
@@ -158,6 +167,10 @@ export default {
 
           codeExplainContent.getAllByCodeNo("ORG_STATE").then(data => {
               this.arrStates = data.entity;
+          })
+
+          codeExplainContent.getAllByCodeNo("ORG_APPROVAL_STATE").then(data => {
+              this.arrApprovalStates = data.entity;
           })
           this.getCity();
       },
