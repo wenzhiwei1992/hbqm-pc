@@ -48,6 +48,10 @@ public class Project extends CommonProperties {
     @Column(name = "assembly_area",precision = 8,scale = 2)
     private BigDecimal assemblyRate;
 
+    /**
+   * 工程规模 */
+      @Column(name = "project_scale",precision = 8,scale = 2)
+      private BigDecimal projectScale;
 
     /**
      * 施工单位

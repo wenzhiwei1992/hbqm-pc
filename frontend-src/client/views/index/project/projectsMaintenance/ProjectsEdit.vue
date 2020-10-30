@@ -42,7 +42,7 @@
 
 
             <el-form-item label="装配面积" prop="assemblyArea"  @keyup.native="parseValue()" >
-                <el-input v-model="editForm.assemblyRate"></el-input>
+                <el-input v-model="editForm.assemblyArea"></el-input>
             </el-form-item>
             <el-form-item label="装配率" prop="assemblyRate"   >
                 <el-input v-model="editForm.assemblyRate" disabled></el-input>
@@ -162,11 +162,14 @@
                     workPlace: [
                         {required: true, message: '请输入项目地址', trigger: 'blur'},
                     ],
+                    longitude: [
+                        {required: true, message: '请输入项目经纬度', trigger: 'blur'},
+                    ],
                     customer: [
                         {required: true, message: '请输入建设单位', trigger: 'blur'},
                     ],
                     assemblyArea: [
-                        {required: true, message: '请输入装配面积率', trigger: 'blur'},
+                        {required: true, message: '请输入装配面积', trigger: 'blur'},
                     ],
                     productionUnit: [
                         {required: true, message: '请输入构件生产单位', trigger: 'blur'},
@@ -249,6 +252,7 @@
                 this.editForm.projectScale = value;
                 if( this.editForm.assemblyArea){
                     this.editForm.assemblyRate = (parseFloat(this.editForm.assemblyArea)/parseFloat(this.editForm.projectScale))*100
+                    this.editForm.assemblyRate =  parseFloat(this.editForm.assemblyRate).toFixed(2);
                 }
             },
             parseValue() {
@@ -264,6 +268,7 @@
                 this.editForm.assemblyArea = value;
                 if( this.editForm.projectScale){
                     this.editForm.assemblyRate = (parseFloat(this.editForm.assemblyArea)/parseFloat(this.editForm.projectScale))*100
+                    this.editForm.assemblyRate =  parseFloat(this.editForm.assemblyRate).toFixed(2);
                 }
             },
             init(){

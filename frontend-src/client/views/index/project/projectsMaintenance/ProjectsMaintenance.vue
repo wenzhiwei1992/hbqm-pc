@@ -89,6 +89,38 @@
                         :rowIndex:="this.rowIndex"
                         router-link
                 >
+                    <el-table-column type="expand">
+                        <template slot-scope="props">
+                            <el-form label-position="left" inline class="demo-table-expand">
+                                <el-form-item label="项目编号"><span>{{ props.row.projectNo }}</span></el-form-item>
+                                <el-form-item label="项目名称"><span>{{ props.row.projectName }}</span></el-form-item>
+                                <el-form-item label="项目地址"><span>{{ props.row.workPlace }}</span></el-form-item>
+                                <el-form-item label="经纬度"><span>{{ props.row.longitude }}</span></el-form-item>
+
+                                <el-form-item label="建设单位"><span>{{ props.row.customer }}</span></el-form-item>
+                                <el-form-item label="构件生产单位"><span>{{ props.row.productionUnit }}</span></el-form-item>
+                                <el-form-item label="施工单位"><span>{{ props.row.undertaking }}</span></el-form-item>
+                                <el-form-item label="工程类型"><span>{{ props.row.projectType }}</span></el-form-item>
+
+                                <el-form-item label="工程规模"><span>{{ props.row.projectScale }}</span></el-form-item>
+                                <el-form-item label="装配面积"><span>{{ props.row.assemblyArea }}</span></el-form-item>
+                                <el-form-item label="装配率"><span>{{ props.row.assemblyRate }}</span></el-form-item>
+
+                                <el-form-item label="结构形式"><span>{{ props.row.structuralStyle }}</span></el-form-item>
+                                <el-form-item label="开工时间"><span>{{ props.row.startDate }}</span></el-form-item>
+                                <el-form-item label="竣工时间"><span>{{ props.row.endDate }}</span></el-form-item>
+                                <el-form-item label="工程进度"><span>{{ props.row.projectProgress }}</span></el-form-item>
+                                <el-form-item label="全装修或装配化装修"><span>{{ props.row.isFullDecoration?"是":"否"  }}</span></el-form-item>
+                                <el-form-item label="政府投资工程"><span>{{ props.row.isInvested?"是":"否"  }}</span></el-form-item>
+                                <el-form-item label="采用工程总承包(EPC)"><span>{{ props.row.isEPC?"是":"否" }}</span></el-form-item>
+
+                                <el-form-item label="省"><span>{{ props.row.provinceName }}</span></el-form-item>
+                                <el-form-item label="市"><span>{{ props.row.cityName }}</span></el-form-item>
+                                <el-form-item label="审批状态"><span>{{ props.row.approvalStatus }}</span></el-form-item>
+
+                            </el-form>
+                        </template>
+                    </el-table-column>
                     <el-table-column type="index" label="序号" width="50"></el-table-column>
                     <el-table-column prop="projectNo" label="项目编号" width="150"></el-table-column>
                     <el-table-column prop="projectName" label="项目名称" width="150"></el-table-column>
@@ -100,23 +132,23 @@
                     <el-table-column prop="projectScale" label="工程类型" width="100"></el-table-column>
 
                     <el-table-column prop="structuralStyle" label="结构形式" ></el-table-column>
-                    <el-table-column prop="startDate" label="开始时间" width="100"></el-table-column>
-                    <el-table-column prop="endDate" label="结束时间" width="100"></el-table-column>
+                    <el-table-column prop="startDate" label="开工时间" width="100"></el-table-column>
+                    <el-table-column prop="endDate" label="竣工时间" width="100"></el-table-column>
                     <el-table-column prop="projectProgress" label="工程进度" width="100"></el-table-column>
-                    <el-table-column prop="isFullDecoration" label="是否为全装修或装配化装修">
+                    <el-table-column prop="isFullDecoration" label="全装修或装配化装修">
                         <template slot-scope="scope">
                             <span v-if="scope.row.isFullDecoration">是</span>
                             <span v-else>否</span>
                         </template>
                     </el-table-column>
-                    <el-table-column prop="isInvested" label="是否为政府投资工程">
+                    <el-table-column prop="isInvested" label="政府投资工程">
                         <template slot-scope="scope">
                             <span v-if="scope.row.isInvested">是</span>
                             <span v-else>否</span>
                         </template>
                     </el-table-column>
 
-                    <el-table-column prop="isEPC" label="是否采用工程总承包(EPC)">
+                    <el-table-column prop="isEPC" label="采用工程总承包(EPC)">
                         <template slot-scope="scope">
                             <span v-if="scope.row.isEPC">是</span>
                             <span v-else>否</span>
