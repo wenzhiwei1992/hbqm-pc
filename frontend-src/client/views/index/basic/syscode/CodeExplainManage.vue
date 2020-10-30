@@ -85,7 +85,7 @@
               width="50"
             >
             </el-table-column>
-            <el-table-column
+            <!-- <el-table-column
               prop="homeTabName"
               label="菜单名称"
               width="100"
@@ -100,7 +100,7 @@
               <template slot-scope="scope">
                 <i style="font-size:16px;" :class="scope.row.homeTabIcon"></i>
               </template>
-            </el-table-column>
+            </el-table-column> -->
             <el-table-column
               prop="remark"
               label="代码备注"
@@ -194,7 +194,7 @@
                 <el-input v-model="scope.row.codeName"></el-input>
               </template>
             </el-table-column>
-            <el-table-column
+            <!-- <el-table-column
               prop="homeTabName"
               label="菜单名称"
               align="center"
@@ -243,7 +243,7 @@
               <template slot-scope="scope">
                 <el-input v-model="scope.row.homeTabRef"></el-input>
               </template>
-            </el-table-column>
+            </el-table-column> -->
             <el-table-column
               prop="isEnabled"
               label="启用"

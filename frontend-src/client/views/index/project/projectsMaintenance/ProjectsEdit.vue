@@ -42,7 +42,7 @@
 
 
             <el-form-item label="装配面积" prop="assemblyArea"  @keyup.native="parseValue()" >
-                <el-input v-model="editForm.assemblyArea"></el-input>
+                <el-input v-model="editForm.assemblyRate"></el-input>
             </el-form-item>
             <el-form-item label="装配率" prop="assemblyRate"   >
                 <el-input v-model="editForm.assemblyRate" disabled></el-input>
@@ -162,14 +162,11 @@
                     workPlace: [
                         {required: true, message: '请输入项目地址', trigger: 'blur'},
                     ],
-                    longitude: [
-                        {required: true, message: '请输入项目经纬度', trigger: 'blur'},
-                    ],
                     customer: [
                         {required: true, message: '请输入建设单位', trigger: 'blur'},
                     ],
                     assemblyArea: [
-                        {required: true, message: '请输入装配面积', trigger: 'blur'},
+                        {required: true, message: '请输入装配面积率', trigger: 'blur'},
                     ],
                     productionUnit: [
                         {required: true, message: '请输入构件生产单位', trigger: 'blur'},
@@ -249,18 +246,13 @@
                 value = value.replace("-", "$#$").replace(/\-/g, "").replace("$#$",
                     "-");
                 value = value.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3'); // 只能输入3个小数
-                if(parseFloat(value)>=100000000){
-                    value = value.substring(0,8);
-                }
                 this.editForm.projectScale = value;
                 if( this.editForm.assemblyArea){
                     this.editForm.assemblyRate = (parseFloat(this.editForm.assemblyArea)/parseFloat(this.editForm.projectScale))*100
-                    this.editForm.assemblyRate =  parseFloat(this.editForm.assemblyRate).toFixed(2);
                 }
             },
             parseValue() {
                 let value = this.editForm.assemblyArea;
-                console.log(value)
                 value = value.replace(/[^(\-)*\d.]/g, ""); // 清除"数字"和"."以外的字符
                 value = value.replace(/^\./g, ""); // 验证第一个字符是数字而不是
                 value = value.replace(/\.{2,}/g, "."); // 只保留第一个. 清除多余的
@@ -269,13 +261,9 @@
                 value = value.replace("-", "$#$").replace(/\-/g, "").replace("$#$",
                     "-");
                 value = value.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3'); // 只能输入3个小数
-                if(parseFloat(value)>=100000000){
-                    value = value.substring(0,8);
-                }
                 this.editForm.assemblyArea = value;
                 if( this.editForm.projectScale){
                     this.editForm.assemblyRate = (parseFloat(this.editForm.assemblyArea)/parseFloat(this.editForm.projectScale))*100
-                    this.editForm.assemblyRate =  parseFloat(this.editForm.assemblyRate).toFixed(2);
                 }
             },
             init(){

@@ -91,6 +91,7 @@ export default {
           this.dateTime = strDate.replace(/[上下午]/g,'');
       },
       toPage(item){
+          log(item,123)
           menuTabService.setCurrentSystem(this.$store, item.title)
           menuTabService.setCurrentMenus(this.$store, [])
           storage.set('currentSystem',item.title)

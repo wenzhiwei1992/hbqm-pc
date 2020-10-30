@@ -303,6 +303,7 @@ export default {
   .register{
     background:#fff;
     overflow: hidden;
+    height:100%;
     .title{
       position:fixed;
       top:0;
@@ -324,5 +325,10 @@ export default {
       justify-content: center;
       margin-bottom:20px;
     }
+  }
+</style>
+<style>
+  body{
+    height:100%
   }
 </style>

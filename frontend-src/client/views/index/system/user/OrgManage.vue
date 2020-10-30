@@ -137,12 +137,11 @@
                 <el-form-item label="状态"><span>{{ props.row.state }}</span></el-form-item>
                 <el-form-item label="组织描述"><span>{{ props.row.orgDesc }}</span></el-form-item>
                 <el-form-item label="审批状态"><span>{{ props.row.approvalStatus }}</span></el-form-item>
-
               </el-form>
             </template>
           </el-table-column>
 
-          <el-table-column prop="orgName"align="center" label="基地名称">
+          <el-table-column prop="orgName" align="center" label="基地名称">
 
           </el-table-column>
 
@@ -686,5 +685,18 @@ export default {
 }
 #entity .el-form-item {
   margin-bottom: 5px;
+}
+
+.demo-table-expand {
+    font-size: 0;
+  }
+.demo-table-expand label {
+  width: 170px;
+  color: #99a9bf;
+}
+.demo-table-expand .el-form-item {
+  margin-right: 0;
+  margin-bottom: 0;
+  width: 100%;
 }
 </style>

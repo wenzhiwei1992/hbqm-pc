@@ -66,8 +66,8 @@
 
                         this.login(this.loginForm)
                             .then(() => {
-                                // this.$router.replace('/index')
-                                this.$router.replace('/menu')
+                                this.$router.replace('/index')
+                                // this.$router.replace('/menu')
                             }).catch((data)=>{
                             console.log('lodin.data',data);//TO DELETE
                         })
