@@ -59,12 +59,6 @@ public class Project extends CommonProperties {
     @Column(name = "undertaking")
     private String undertaking;
 
-    /**
-     * 工程规模
-     */
-    @Column(name = "project_scale")
-    private String projectScale;
-
 
     /**
      * 工程类型

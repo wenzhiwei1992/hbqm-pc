@@ -207,6 +207,9 @@ export default {
           value = value.replace("-", "$#$").replace(/\-/g, "").replace("$#$",
               "-");
           value = value.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3'); // 只能输入3个小数
+          if(parseFloat(value)>=100000000){
+              value = value.substring(0,8);
+          }
           this.editForm.designProductivity = value;
       },
       parseValue() {
@@ -219,6 +222,9 @@ export default {
           value = value.replace("-", "$#$").replace(/\-/g, "").replace("$#$",
               "-");
           value = value.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3'); // 只能输入3个小数
+          if(parseFloat(value)>=100000000){
+              value = value.substring(0,8);
+          }
           this.editForm.realProductivity = value;
       },
 

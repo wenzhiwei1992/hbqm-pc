@@ -249,6 +249,9 @@
                 value = value.replace("-", "$#$").replace(/\-/g, "").replace("$#$",
                     "-");
                 value = value.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3'); // 只能输入3个小数
+                if(parseFloat(value)>=100000000){
+                    value = value.substring(0,8);
+                }
                 this.editForm.projectScale = value;
                 if( this.editForm.assemblyArea){
                     this.editForm.assemblyRate = (parseFloat(this.editForm.assemblyArea)/parseFloat(this.editForm.projectScale))*100
@@ -257,6 +260,7 @@
             },
             parseValue() {
                 let value = this.editForm.assemblyArea;
+                console.log(value)
                 value = value.replace(/[^(\-)*\d.]/g, ""); // 清除"数字"和"."以外的字符
                 value = value.replace(/^\./g, ""); // 验证第一个字符是数字而不是
                 value = value.replace(/\.{2,}/g, "."); // 只保留第一个. 清除多余的
@@ -265,6 +269,9 @@
                 value = value.replace("-", "$#$").replace(/\-/g, "").replace("$#$",
                     "-");
                 value = value.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3'); // 只能输入3个小数
+                if(parseFloat(value)>=100000000){
+                    value = value.substring(0,8);
+                }
                 this.editForm.assemblyArea = value;
                 if( this.editForm.projectScale){
                     this.editForm.assemblyRate = (parseFloat(this.editForm.assemblyArea)/parseFloat(this.editForm.projectScale))*100
