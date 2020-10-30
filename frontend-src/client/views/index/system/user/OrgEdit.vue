@@ -128,18 +128,45 @@ export default {
         arrApprovalStates:[],
         arrStates: [],
       eidtFormRules: {
-        orgCode: [
-          {required: true, message: '请输入组织编码', trigger: 'blur'},
-        ],
-        orgName: [
-          {required: true, message: '请输入组织名称', trigger: 'blur'},
-        ],
-        rootOrg: [
-          {required: true, message: '请设置根组织', trigger: 'blur'},
-        ],
-        isWithinOrg: [
-          {required: true, message: '请设置是否属于集团内', trigger: 'blur'},
-        ],
+          orgName: [
+              {required: true, message: '请输入组织名称', trigger: 'blur'},
+          ],
+          address: [
+              {required: true, message: '请设置根组织', trigger: 'blur'},
+          ],
+          longitude: [
+              {required: true, message: '请设置是否属于集团内', trigger: 'blur'},
+          ],
+          proposer: [
+              {required: true, message: '请设置是否属于集团内', trigger: 'blur'},
+          ],
+          proposerPhone: [
+              {required: true, message: '请设置是否属于集团内', trigger: 'blur'},
+          ],
+          provinceId: [
+              {required: true, message: '请设置是否属于集团内', trigger: 'blur'},
+          ],
+          cityId: [
+              {required: true, message: '请设置是否属于集团内', trigger: 'blur'},
+          ],
+          productionType: [
+              {required: true, message: '请设置是否属于集团内', trigger: 'blur'},
+          ],
+          lineNum: [
+              {required: true, message: '请设置是否属于集团内', trigger: 'blur'},
+          ],
+          designProductivity: [
+              {required: true, message: '请设置是否属于集团内', trigger: 'blur'},
+          ],
+          realProductivity: [
+              {required: true, message: '请设置是否属于集团内', trigger: 'blur'},
+          ],
+          state: [
+              {required: true, message: '请设置是否属于集团内', trigger: 'blur'},
+          ],
+          orgDesc: [
+              {required: true, message: '请设置是否属于集团内', trigger: 'blur'},
+          ]
 
       },
     }
