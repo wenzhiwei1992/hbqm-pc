@@ -111,6 +111,7 @@ import orgModel from '@/model/system/org'
 import codeExplainContent from '@/model/basicdata/codeExlpainContent'
 import {Notification} from 'element-ui'
 import deptModel from '@/model/basicdata/dept'
+import {validatePhone} from '@/util/validate.js'
 
 export default {
   // props: ['editForm', 'mode'],
@@ -125,42 +126,49 @@ export default {
       eidtFormRules: {
         orgName: [
           {required: true, message: '请输入组织名称', trigger: 'blur'},
+            { min: 1, max: 10, message: '长度请控制在10个字符以内', trigger: 'blur' }
         ],
         address: [
-          {required: true, message: '请设置根组织', trigger: 'blur'},
+          {required: true, message: '请输入组织地址', trigger: 'blur'},
+            { min: 1, max: 50, message: '长度请控制在50个字符以内', trigger: 'blur' }
         ],
         longitude: [
-          {required: true, message: '请设置是否属于集团内', trigger: 'blur'},
+          {required: true, message: '请输入经纬度', trigger: 'blur'},
+            { min: 1, max: 50, message: '长度请控制在50个字符以内', trigger: 'blur' }
         ],
         proposer: [
-          {required: true, message: '请设置是否属于集团内', trigger: 'blur'},
+          {required: true, message: '请输入申请人', trigger: 'blur'},
+            { min: 1, max: 10, message: '长度请控制在10个字符以内', trigger: 'blur' }
         ],
         proposerPhone: [
-          {required: true, message: '请设置是否属于集团内', trigger: 'blur'},
+          {required: true, message: '请输入申请人手机号', trigger: 'blur'},
+            { validator: validatePhone, trigger: 'blur' }
         ],
         provinceId: [
-          {required: true, message: '请设置是否属于集团内', trigger: 'blur'},
+          {required: true, message: '请输入省', trigger: 'blur'},
         ],
         cityId: [
-          {required: true, message: '请设置是否属于集团内', trigger: 'blur'},
+          {required: true, message: '请输入市', trigger: 'blur'},
         ],
         productionType: [
-          {required: true, message: '请设置是否属于集团内', trigger: 'blur'},
+          {required: true, message: '请输入生产类型', trigger: 'blur'},
         ],
         lineNum: [
-          {required: true, message: '请设置是否属于集团内', trigger: 'blur'},
+          {required: true, message: '请输入生产线/条', trigger: 'blur'},
+            { min: 1, max: 10, message: '长度请控制在10个字符以内', trigger: 'blur' }
         ],
         designProductivity: [
-          {required: true, message: '请设置是否属于集团内', trigger: 'blur'},
+          {required: true, message: '请输入设计生产能力(万m/万吨)', trigger: 'blur'},
         ],
         realProductivity: [
-          {required: true, message: '请设置是否属于集团内', trigger: 'blur'},
+          {required: true, message: '请输入实际生产能力(万m/万吨)', trigger: 'blur'},
         ],
         state: [
-          {required: true, message: '请设置是否属于集团内', trigger: 'blur'},
+          {required: true, message: '请输入状态', trigger: 'blur'},
         ],
         orgDesc: [
-          {required: true, message: '请设置是否属于集团内', trigger: 'blur'},
+          {required: true, message: '请输入组织描述', trigger: 'blur'},
+            { min: 1, max: 100, message: '长度请控制在100个字符以内', trigger: 'blur' }
         ]
       },
       editForm:{

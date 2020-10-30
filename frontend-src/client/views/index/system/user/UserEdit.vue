@@ -57,6 +57,7 @@
     import {Notification} from 'element-ui'
     import orgModel from '../../../../model/system/org'
     import deptModel from '../../../../model/basicdata/dept'
+    import {validatePhone} from '@/util/validate.js'
 
     export default {
         props: ['editForm', 'mode'],
@@ -65,9 +66,11 @@
                 eidtFormRules: {
                     username: [
                         {required: true, message: '请输入用户名', trigger: 'blur'},
+                        { min: 1, max: 10, message: '长度请控制在10个字符以内', trigger: 'blur' }
                     ],
                     realName: [
                         {required: true, message: '请输入真实姓名', trigger: 'blur'},
+                        { min: 1, max: 10, message: '长度请控制在10个字符以内', trigger: 'blur' }
                     ],
                     orgId: [
                         {required: true, message: '请选择所属组织', trigger: 'blur'},
@@ -80,6 +83,7 @@
                     ],
                     mobile: [
                         {required: true, message: '请输入手机号', trigger: 'blur'},
+                        { validator: validatePhone, trigger: 'blur' }
                     ],
                 },
                 orgs: [],

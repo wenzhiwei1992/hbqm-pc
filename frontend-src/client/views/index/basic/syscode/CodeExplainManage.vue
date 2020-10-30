@@ -366,12 +366,15 @@ export default {
       eidtFormRules: {
         codeNo: [
           { required: true, message: '必填项', trigger: 'blur' },
+            { min: 1, max: 10, message: '长度请控制在10个字符以内', trigger: 'blur' }
         ],
         codeBelong: [
           { required: true, validator: check, trigger: 'blur' },
+            { min: 1, max: 10, message: '长度请控制在20个字符以内', trigger: 'blur' }
         ],
         codeName: [
           { required: true, message: '必填项', trigger: 'blur' },
+            { min: 1, max: 10, message: '长度请控制在10个字符以内', trigger: 'blur' }
         ]
       },
       codeExplainContents: [],

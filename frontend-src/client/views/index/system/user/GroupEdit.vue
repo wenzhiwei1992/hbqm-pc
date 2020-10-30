@@ -38,6 +38,10 @@
                 eidtFormRules: {
                     groupName: [
                         {required: true, message: '请输入角色名', trigger: 'blur'},
+                        { min: 1, max: 10, message: '长度请控制在10个字符以内', trigger: 'blur' }
+                    ],
+                    groupDesc: [
+                        { min: 0, max: 100, message: '长度请控制在100个字符以内', trigger: 'blur' }
                     ],
                 },
                 orgs: []

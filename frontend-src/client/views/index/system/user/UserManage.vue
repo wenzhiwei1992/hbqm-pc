@@ -234,20 +234,6 @@
                         {required: true, validator: this.confirmValidator, trigger: "blur"}
                     ],
                 },
-                qywxFormRules: {
-                    corpid: [
-                        {required: true, message: '请输入', trigger: 'blur'},
-                    ],
-                    corpsecret: [
-                        {required: true, message: '请输入', trigger: "blur"}
-                    ],
-                    deptId: [
-                        {required: true, message: '请输入', trigger: "blur"}
-                    ],
-
-                },
-                qywxVisiable: false,
-                qywxForm: {},
                 buttonData: [
                     {
                         name: '新建',
